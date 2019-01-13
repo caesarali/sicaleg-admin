@@ -16,3 +16,13 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('test', function () {
+    $this->comment('Message');
+})->describe('Test Command');
+
+Artisan::command('sipileg:seed', function () {
+    Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
+    Artisan::call('db:seed');
+    $this->comment('Data Seed SIPILEG berhasil ter-Init.');
+});
