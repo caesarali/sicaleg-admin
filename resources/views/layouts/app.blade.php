@@ -15,7 +15,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
     <div id="app" class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-light bg-danger app-shadow">
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
@@ -36,8 +36,8 @@
             </ul>
         </nav>
 
-        <aside class="main-sidebar sidebar-dark-danger elevation-4" style="overflow-x: hidden;">
-            <a href="{{ url('/') }}" class="brand-link bg-danger app-shadow">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
+            <a href="{{ url('/') }}" class="brand-link">
                 <img src="{{ asset('images/logo-m-90x90.png') }}" alt="APP Logo" class="brand-image img-circle">
                 <span class="brand-text font-weight-bold">{{ config('app.name') }}</span>
             </a>
@@ -64,19 +64,19 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.dashboard' }" class="nav-link close-sidebar">
                                 <i class="fas fa-tachometer-alt nav-icon"></i>
-                                <p>Dashboard</p>
+                                <p class="ml-1">Dashboard</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.candidate' }" class="nav-link close-sidebar">
                                 <i class="fas fa-user-tie nav-icon"></i>
-                                <p>Calon Legislatif</p>
+                                <p class="ml-1">Calon Legislatif</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.coordinators' }" class="nav-link close-sidebar">
                                 <i class="fas fa-users nav-icon"></i>
-                                <p>Kordinator</p>
+                                <p class="ml-1">Kordinator</p>
                             </router-link>
                         </li>
                     </ul>

@@ -33,9 +33,9 @@ const router = new Router({
         { path: '/admin', component: Administrator,
             children: [
                 { path: '', redirect: 'dashboard'},
-                { path: 'dashboard', name: 'admin.dashboard', component: Dashboard},
-                { path: 'candidate', name: 'admin.candidate', component: Candidate},
-                { path: 'coordinators', name: 'admin.coordinators', component: Coordinator},
+                { path: 'dashboard', name: 'admin.dashboard', component: Dashboard },
+                { path: 'candidate', name: 'admin.candidate', component: Candidate },
+                { path: 'coordinators', name: 'admin.coordinators', component: Coordinator },
             ]
         },
 

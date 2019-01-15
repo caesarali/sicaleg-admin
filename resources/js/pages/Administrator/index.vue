@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import NotFound from '../Errors/404.vue';
+import NotFound from '../Errors/404';
 
 export default {
     components: { NotFound }
