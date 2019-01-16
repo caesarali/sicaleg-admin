@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('API')->group(function () {
+    Route::namespace('Candidate')->group(function () {
+        Route::get('candidate', 'ProfileController@index');
+        Route::patch('candidate/{candidate}', 'ProfileController@update');
+    });
+
+    Route::namespace('Laravolt')->group(function () {
+        Route::apiResource('provinces', 'ProvinceController')->except('show');
+    });
+});

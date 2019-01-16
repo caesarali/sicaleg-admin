@@ -19,6 +19,7 @@ class CreateCandidatesTable extends Migration
             $table->integer('number')->unsigned()->nullable();
             $table->integer('level_id')->unsigned()->nullable();
             $table->nullableMorphs('locationable');
+            $table->string('locationable_name')->nullable();
             $table->integer('picture_id')->unsigned()->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();

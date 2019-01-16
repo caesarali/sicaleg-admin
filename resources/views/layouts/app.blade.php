@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="level" content="{{ Auth::user()->role()->name }}">
+    <meta name="env-level" content="{{ env('CALEG_LEVEL', 'dpr') }}">
     <title>{{ config('app.name') }} - {{ config('app.desc') }}</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
