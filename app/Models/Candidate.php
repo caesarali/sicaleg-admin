@@ -15,4 +15,8 @@ class Candidate extends Model
     public function level() {
         return $this->belongsTo(CandidateLevel::class, 'level_id');
     }
+
+    public function locationable() {
+        return $this->morphTo();
+    }
 }

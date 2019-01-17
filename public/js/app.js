@@ -54561,9 +54561,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Web Project\LaraPro\sipileg_v2\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Web Project\LaraPro\sipileg_v2\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\Web Project\LaraPro\sipileg_v2\resources\sass\guest.scss */"./resources/sass/guest.scss");
+__webpack_require__(/*! D:\Web Apps\LaraPro\sipileg_v2\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Web Apps\LaraPro\sipileg_v2\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\Web Apps\LaraPro\sipileg_v2\resources\sass\guest.scss */"./resources/sass/guest.scss");
 
 
 /***/ })

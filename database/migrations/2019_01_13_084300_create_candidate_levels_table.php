@@ -17,6 +17,7 @@ class CreateCandidateLevelsTable extends Migration
             $table->increments('id');
             $table->string('code', 5)->unique();
             $table->string('name');
+            $table->string('locationable')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

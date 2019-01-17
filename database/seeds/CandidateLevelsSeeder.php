@@ -12,8 +12,8 @@ class CandidateLevelsSeeder extends Seeder
     public function run()
     {
         DB::table('candidate_levels')->insert([
-            ['code' => 'dpr', 'name' => 'Caleg DPR'],
-            ['code' => 'dprd', 'name' => 'Caleg DPRD']
+            ['code' => 'dpr', 'name' => 'Caleg DPR', 'locationable' => 'App\Models\Province'],
+            ['code' => 'dprd', 'name' => 'Caleg DPRD', 'locationable' => 'App\Models\City']
         ]);
     }
 }
