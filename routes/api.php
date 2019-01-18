@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('API')->group(function () {
     Route::namespace('Candidate')->group(function () {
-        Route::get('candidate', 'ProfileController@index');
-        Route::patch('candidate/{candidate}', 'ProfileController@update');
+        Route::apiResource('candidate', 'ProfileController')->only(['index', 'update']);
+        Route::apiResource('candidate/locations', 'LocationsController')->only(['index', 'store', 'destroy']);
     });
 
     Route::namespace('Laravolt')->group(function () {

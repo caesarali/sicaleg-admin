@@ -3,6 +3,21 @@ window.Vue = require('vue');
 
 import router from './routes';
 
+// Confirm Message
+import Confirm from './commons/Confirm';
+Vue.prototype.$confirm = new Confirm;
+
+// Sweetalert2
+import swal from 'sweetalert2';
+window.swal = swal;
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
+
 // vForm Libs
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;

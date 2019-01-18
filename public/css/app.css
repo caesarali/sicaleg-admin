@@ -21104,5 +21104,14 @@ body {
     display: block;
     width: 100%;
   }
+
+  .modal-dialog {
+    margin: 0 !important;
+  }
+
+  .modal-content {
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
 }
 

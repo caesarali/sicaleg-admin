@@ -9,6 +9,8 @@ class CandidateLevel extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['code', 'name'];
+    protected $fillable = ['code', 'name', 'locationable', 'locationable_child'];
     protected $dates = ['deleted_at'];
+
+
 }

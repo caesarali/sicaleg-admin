@@ -23,8 +23,9 @@
                 </li>
             </ul>
 
-            <a href="{{ url('/') }}" class="brand-link bg-danger mx-auto py-0 d-inline-block d-sm-none">
-                <img src="{{ asset('images/sipileg-sm.png') }}" alt="APP Logo" class="brand-image">
+            <a href="{{ url('/') }}" class="brand-link mx-auto py-0 my-0 d-inline-block d-sm-none h3 font-weight-bold">
+                {{-- <img src="{{ asset('images/sipileg-sm.png') }}" alt="APP Logo" class="brand-image"> --}}
+                {{ config('app.name') }}
             </a>
 
             {{-- Right Menu --}}

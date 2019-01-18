@@ -20,6 +20,7 @@ class HomeController extends Controller
     {
         $this->level = env('CALEG_LEVEL', 'dpr');
         $this->middleware('auth');
+        $this->middleware('installed')->only('index');
     }
 
     public function index()

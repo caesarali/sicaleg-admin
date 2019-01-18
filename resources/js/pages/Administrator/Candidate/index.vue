@@ -23,26 +23,16 @@
                         </div>
                         <div class="widget-user-header bg-info-active mb-3">
                             <h3 class="widget-user-username text-center">{{ profile.name }}</h3>
-                            <h5 class="widget-user-desc text-center">{{ profile.level }} - No. Urut {{ profile.number }}</h5>
+                            <h5 class="widget-user-desc text-center">NO. {{ profile.number }}</h5>
                         </div>
                         <div class="widget-user-image mt-3">
                             <img class="img-circle elevation-2 bg-gray" src="/images/sipileg-logo-mono.png" alt="User Avatar" width="100%" height="auto">
                         </div>
                         <div class="card-footer">
-                            <!-- <div class="row d-none d-md-flex">
-                                <div class="col-sm border-right">
-                                    <div class="description-block">
-                                        <h5 class="description-header">20</h5>
-                                        <span class="description-text">{{ profile.level }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="description-block">
-                                        <h5 class="description-header">500</h5>
-                                        <span class="description-text">No. Urut {{ profile.number }}</span>
-                                    </div>
-                                </div>
-                            </div> -->
+                            <div class="description-block">
+                                <h5 class="description-header">Calon Legislatif</h5>
+                                <span class="description-text text-uppercase">{{ $root.env_level }}</span>
+                            </div>
                         </div>
                     </div>
                     <dapil-component :name="profile.dapil_name" :locations="profile.dapil_locations" />
@@ -77,11 +67,11 @@
                             </div>
                             <div class="form-group row">
                                 <label for="locationable_name" class="col-sm-3 col-form-label">Dapil</label>
-                                <div class="col-md-4">
+                                <div class="col-5 col-sm-4">
                                     <input v-model="form.locationable_name" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('locationable_name') }" name="locationable_name" placeholder="Nama Dapil, Ex: DAPIL 1 SULSEL..">
                                     <has-error :form="form" field="locationable_name"></has-error>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-7 col-sm-5">
                                     <select name="locationable_id" id="locationable_id" v-model="form.locationable_id" class="form-control" :class="{ 'is-invalid': form.errors.has('locationable_id') }">
                                         <option value="" hidden>Provinsi:</option>
                                         <option :value="item.id" v-for="item in provinces" :key="item.id">
@@ -93,8 +83,8 @@
                             </div>
                         </div>
                         <div class="modal-footer border-top-0 bg-light">
-                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
-                            <button-default type="submit" :disabled="form.busy" class="btn-sm">
+                            <button type="button" class="btn btn-secondary btn-sm d-none d-sm-inline-block" data-dismiss="modal">Batal</button>
+                            <button-default type="submit" :disabled="form.busy" class="btn-sm btn-block-xs">
                                 <i class="fas fa-check"></i> <span class="ml-1">Simpan</span>
                             </button-default>
                         </div>

@@ -16,11 +16,10 @@ class Installed
      */
     public function handle($request, Closure $next)
     {
-        return redirect()->route('setup');
-        // $candidate = Candidate::all();
-        // if (empty($candidate)) {
-        //     return redirect()->route('setup');
-        // }
-        // return $next($request);
+        $candidate = Candidate::all()->first();
+        if (!$candidate) {
+            return redirect()->route('setup');
+        }
+        return $next($request);
     }
 }
