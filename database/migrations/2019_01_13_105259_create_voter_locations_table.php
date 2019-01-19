@@ -16,6 +16,7 @@ class CreateVoterLocationsTable extends Migration
         Schema::create('voter_locations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('voter_id')->unsigned();
+            $table->integer('province_id')->unsigned();
             $table->integer('city_id')->unsigned()->nullable();
             $table->integer('district_id')->unsigned()->nullable();
             $table->bigInteger('village_id')->unsigned()->nullable();
@@ -24,6 +25,7 @@ class CreateVoterLocationsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('voter_id')->references('id')->on('voters')->onDelete('cascade');
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
             $table->foreign('village_id')->references('id')->on('villages')->onDelete('cascade');

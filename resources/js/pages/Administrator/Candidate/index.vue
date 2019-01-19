@@ -90,6 +90,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="text-center m-1 d-block d-sm-none" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-angle-double-up"></i>
+                </div>
             </div>
         </div>
     </section>
@@ -120,25 +123,29 @@ export default {
         getProfile() {
             axios.get('/candidate')
             .then(({ data }) => { this.profile = data.data })
-            .catch(({ message }) => { alert(message) })
+            .catch(({ message }) => { toast({ type: 'error', title: message }) })
         },
 
         getProvinces() {
             axios.get('/provinces')
             .then(({ data }) => { this.provinces = data })
-            .catch(({ message }) => { alert(message) })
+            .catch(({ message }) => { toast({ type: 'error', title: message }) })
         },
-
         edit() {
-            this.form.fill(this.profile);
-            $('#candidateModal').modal('show');
+            this.form.fill(this.profile)
+            this.modal('show')
         },
         update() {
             this.form.patch('/candidate/' + this.form.id)
             .then(({ data }) => {
                 this.profile = data.data
-                $('#candidateModal').modal('hide');
+                this.modal('hide')
+                toast({type: 'success', text: data.message})
             })
+            .catch(({ message }) => { toast({ type: 'error', title: message }) })
+        },
+        modal(action) {
+            $('#candidateModal').modal(action)
         }
     },
 

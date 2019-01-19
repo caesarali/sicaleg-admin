@@ -56,30 +56,62 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'home' }" class="nav-link close-sidebar">
-                                <i class="fas fa-home nav-icon"></i>
-                                <p>Home</p>
-                            </router-link>
-                        </li>
+                        @role(['superadmin', 'admin'])
+                            <li class="nav-item">
+                                <router-link :to="{ name: 'admin.dashboard' }" class="nav-link close-sidebar">
+                                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                                    <p class="ml-1">Dashboard</p>
+                                </router-link>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <router-link :to="{ name: 'home' }" class="nav-link close-sidebar">
+                                    <i class="fas fa-home nav-icon"></i>
+                                    <p>Home</p>
+                                </router-link>
+                            </li>
+                        @endrole
                         <li class="nav-header">ADMIN MENU</li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'admin.dashboard' }" class="nav-link close-sidebar">
-                                <i class="fas fa-tachometer-alt nav-icon"></i>
-                                <p class="ml-1">Dashboard</p>
-                            </router-link>
-                        </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.candidate' }" class="nav-link close-sidebar">
                                 <i class="fas fa-user-tie nav-icon"></i>
-                                <p class="ml-1">Calon Legislatif</p>
+                                <p class="ml-1">CALEG</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'admin.party' }" class="nav-link close-sidebar">
+                                <i class="far fa-flag nav-icon"></i>
+                                <p class="ml-1">PARTAI</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.coordinators' }" class="nav-link close-sidebar">
                                 <i class="fas fa-users nav-icon"></i>
-                                <p class="ml-1">Kordinator</p>
+                                <p class="ml-1">KORDINATOR</p>
                             </router-link>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-database"></i>
+                                <p>
+                                    MASTER
+                                    <i class="fa fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <router-link :to="{ name: 'master.tps' }" class="nav-link close-sidebar">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>TPS</p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>DPT</p>
+                                    </router-link>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>

@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('API')->group(function () {
+    Route::apiResource('party', 'PartyController')->only(['index', 'update']);
+
     Route::namespace('Candidate')->group(function () {
         Route::apiResource('candidate', 'ProfileController')->only(['index', 'update']);
         Route::apiResource('candidate/locations', 'LocationsController')->only(['index', 'store', 'destroy']);

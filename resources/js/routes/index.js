@@ -8,7 +8,11 @@ import Home from '../pages/Web/Home';
 import Administrator from "../pages/Administrator";
 import Dashboard from "../pages/Administrator/Dashboard";
 import Candidate from "../pages/Administrator/Candidate";
+import Party from "../pages/Administrator/Party";
 import Coordinator from "../pages/Administrator/Coordinator";
+import Master from "../pages/Administrator/Master";
+import Voter from "../pages/Administrator/Master/Voter";
+import VotingPlace from "../pages/Administrator/Master/VotingPlace";
 
 // Error Page Components
 import PageNotFound from "../pages/Errors/404";
@@ -35,7 +39,14 @@ const router = new Router({
                 { path: '', redirect: 'dashboard'},
                 { path: 'dashboard', name: 'admin.dashboard', component: Dashboard },
                 { path: 'candidate', name: 'admin.candidate', component: Candidate },
+                { path: 'party', name: 'admin.party', component: Party },
                 { path: 'coordinators', name: 'admin.coordinators', component: Coordinator },
+                { path: 'master', component: Master,
+                    children: [
+                        { path: 'tps', name: 'master.tps', component: VotingPlace },
+                        { path: 'dpt', name: 'master.dpt', component: Voter },
+                    ]
+                },
             ]
         },
 
