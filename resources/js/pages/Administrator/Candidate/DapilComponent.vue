@@ -63,6 +63,7 @@ export default {
     },
     data() {
         return {
+            endpoint: '/candidate/dapil',
             locations: [],
             dapil: [],
             form: new Form({
@@ -78,7 +79,7 @@ export default {
             this.modal('show')
         },
         store() {
-            this.form.post('/candidate/locations')
+            this.form.post(this.endpoint)
             .then(({ data }) => {
                 this.dapil.push(data.data)
                 this.modal('hide')
@@ -89,7 +90,7 @@ export default {
         destroy(index, id) {
             this.$confirm.delete().then((result) => {
                 if (result.value) {
-                    this.form.delete('/candidate/locations/' + id)
+                    this.form.delete(this.endpoint + '/' + id)
                     .then(({ data }) => {
                         this.dapil.splice(index, 1);
                         toast({ type: 'success', title: data.message })
@@ -107,7 +108,7 @@ export default {
     },
 
     created() {
-        axios.get('/candidate/locations').then(({ data }) => {
+        axios.get(this.endpoint).then(({ data }) => {
             this.dapil = data.data
             this.locations = data.locations
         })

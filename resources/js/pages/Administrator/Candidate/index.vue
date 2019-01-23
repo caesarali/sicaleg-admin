@@ -107,6 +107,7 @@ export default {
 
     data() {
         return {
+            endpoint: '/candidate/profile/',
             profile: [],
             provinces: [],
             form: new Form({
@@ -121,7 +122,7 @@ export default {
 
     methods: {
         getProfile() {
-            axios.get('/candidate')
+            axios.get(this.endpoint)
             .then(({ data }) => { this.profile = data.data })
             .catch(({ message }) => { toast({ type: 'error', title: message }) })
         },
@@ -136,7 +137,7 @@ export default {
             this.modal('show')
         },
         update() {
-            this.form.patch('/candidate/' + this.form.id)
+            this.form.patch(this.endpoint + this.form.id)
             .then(({ data }) => {
                 this.profile = data.data
                 this.modal('hide')

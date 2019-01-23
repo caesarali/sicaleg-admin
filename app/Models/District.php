@@ -8,6 +8,16 @@ class District extends Model
 {
     protected $fillable = ['name', 'city_id'];
 
+    protected $appends = ['alias'];
+
+    public function getAliasAttribute() {
+        return $this->attributes['alias'] = 'district_id';
+    }
+
+    public function getNameAttribute($value) {
+        return $this->attributes['name'] = ucwords(strtolower($value));
+    }
+
     public function city() {
         return $this->belongsTo(City::class);
     }

@@ -20,9 +20,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('API')->group(function () {
     Route::apiResource('party', 'PartyController')->only(['index', 'update']);
 
-    Route::namespace('Candidate')->group(function () {
-        Route::apiResource('candidate', 'ProfileController')->only(['index', 'update']);
-        Route::apiResource('candidate/locations', 'LocationsController')->only(['index', 'store', 'destroy']);
+    Route::namespace('Candidate')->prefix('candidate')->group(function () {
+        Route::apiResource('profile', 'ProfileController')->only(['index', 'update']);
+        Route::apiResource('locations', 'LocationsController')->only(['index', 'store', 'destroy']);
+        Route::apiResource('dapil', 'DapilController')->only(['index', 'store', 'destroy']);
+    });
+
+    Route::namespace('Voter')->group(function () {
+        Route::get('/dpt/list', 'DptController@index');
     });
 
     Route::namespace('Laravolt')->group(function () {

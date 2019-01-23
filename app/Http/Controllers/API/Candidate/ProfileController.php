@@ -17,9 +17,9 @@ class ProfileController extends Controller
         return new CandidateResource($candidate);
     }
 
-    public function update(Request $request, Candidate $candidate)
+    public function update(Request $request, Candidate $profile)
     {
-        $candidate->update($request->all());
-        return (new CandidateResource($candidate))->additional(['message' => 'Profile diperbarui.'], 200);
+        $profile->update($request->all());
+        return (new CandidateResource($profile))->additional(['message' => 'Profile diperbarui.'], 200);
     }
 }

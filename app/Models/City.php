@@ -8,6 +8,12 @@ class City extends Model
 {
     protected $fillable = ['name', 'province_id'];
 
+    protected $appends = ['alias'];
+
+    public function getAliasAttribute() {
+        return $this->attributes['alias'] = 'city_id';
+    }
+
     public function getNameAttribute($value) {
         return $this->attributes['name'] = ucwords(strtolower($value));
     }

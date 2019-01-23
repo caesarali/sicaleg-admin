@@ -100,12 +100,6 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <router-link :to="{ name: 'master.tps' }" class="nav-link close-sidebar">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>TPS</p>
-                                    </router-link>
-                                </li>
-                                <li class="nav-item">
                                     <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DPT</p>

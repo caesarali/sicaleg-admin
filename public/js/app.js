@@ -1927,6 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      endpoint: '/candidate/dapil',
       locations: [],
       dapil: [],
       form: new Form({
@@ -1944,7 +1945,7 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this = this;
 
-      this.form.post('/candidate/locations').then(function (_ref) {
+      this.form.post(this.endpoint).then(function (_ref) {
         var data = _ref.data;
 
         _this.dapil.push(data.data);
@@ -1962,7 +1963,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$confirm.delete().then(function (result) {
         if (result.value) {
-          _this2.form.delete('/candidate/locations/' + id).then(function (_ref2) {
+          _this2.form.delete(_this2.endpoint + '/' + id).then(function (_ref2) {
             var data = _ref2.data;
 
             _this2.dapil.splice(index, 1);
@@ -1987,7 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this3 = this;
 
-    axios.get('/candidate/locations').then(function (_ref3) {
+    axios.get(this.endpoint).then(function (_ref3) {
       var data = _ref3.data;
       _this3.dapil = data.data;
       _this3.locations = data.locations;
@@ -2114,6 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      endpoint: '/candidate/profile/',
       profile: [],
       provinces: [],
       form: new Form({
@@ -2129,7 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
     getProfile: function getProfile() {
       var _this = this;
 
-      axios.get('/candidate').then(function (_ref) {
+      axios.get(this.endpoint).then(function (_ref) {
         var data = _ref.data;
         _this.profile = data.data;
       }).catch(function (_ref2) {
@@ -2161,7 +2163,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this3 = this;
 
-      this.form.patch('/candidate/' + this.form.id).then(function (_ref5) {
+      this.form.patch(this.endpoint + this.form.id).then(function (_ref5) {
         var data = _ref5.data;
         _this3.profile = data.data;
 
@@ -2237,7 +2239,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      locations: []
+    };
+  },
+  watch: {
+    '$route': function $route(to, from) {
+      this.init();
+    }
+  },
+  created: function created() {
+    this.init();
+  },
+  methods: {
+    init: function init() {
+      var _this = this;
+
+      var params = this.$route.query;
+      axios.get('/dpt/list', {
+        params: params
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.locations = data.data;
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -42732,9 +42819,130 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-auto d-none d-md-inline-block" },
+            [
+              _c(
+                "button-default",
+                { attrs: { type: "button", click: _vm.$root.goBack() } },
+                [_vm._v("\n                        Back\n                    ")]
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "content px-2" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v(
+                  "\n                            Daftar Pemilih Tetap\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body p-0 table-responsive" }, [
+                _c("table", { staticClass: "table table-hover" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.locations, function(item, index) {
+                      return _c("tr", { key: item.id }, [
+                        _c("td", { staticClass: "text-center" }, [
+                          _vm._v(_vm._s(index + 1) + ".")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to:
+                                    "/admin/master/dpt/list?" +
+                                    item.alias +
+                                    "=" +
+                                    item.id
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                                " +
+                                    _vm._s(item.name) +
+                                    "\n                                            "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col" }, [
+      _c("div", { staticClass: "form-inline" }, [
+        _c("div", { staticClass: "input-group app-shadow" }, [
+          _c("input", {
+            staticClass: "form-control form-control-navbar border-0",
+            attrs: {
+              type: "search",
+              placeholder: "Search",
+              "aria-label": "Search"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c("div", { staticClass: "input-group-text bg-white border-0" }, [
+              _c("i", { staticClass: "fa fa-search" })
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center", attrs: { width: "1%" } }, [
+          _vm._v("#")
+        ]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Wilayah")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -58047,38 +58255,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Administrator/Master/VotingPlace/index.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/pages/Administrator/Master/VotingPlace/index.vue ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-component.options.__file = "resources/js/pages/Administrator/Master/VotingPlace/index.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/pages/Administrator/Master/index.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/pages/Administrator/Master/index.vue ***!
@@ -58498,11 +58674,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Administrator_Coordinator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/Administrator/Coordinator */ "./resources/js/pages/Administrator/Coordinator/index.vue");
 /* harmony import */ var _pages_Administrator_Master__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../pages/Administrator/Master */ "./resources/js/pages/Administrator/Master/index.vue");
 /* harmony import */ var _pages_Administrator_Master_Voter__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../pages/Administrator/Master/Voter */ "./resources/js/pages/Administrator/Master/Voter/index.vue");
-/* harmony import */ var _pages_Administrator_Master_VotingPlace__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Administrator/Master/VotingPlace */ "./resources/js/pages/Administrator/Master/VotingPlace/index.vue");
-/* harmony import */ var _pages_Errors_404__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/Errors/404 */ "./resources/js/pages/Errors/404.vue");
+/* harmony import */ var _pages_Errors_404__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../pages/Errors/404 */ "./resources/js/pages/Errors/404.vue");
 
  // Page Components
-
 
 
 
@@ -58564,11 +58738,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: 'master',
       component: _pages_Administrator_Master__WEBPACK_IMPORTED_MODULE_9__["default"],
       children: [{
-        path: 'tps',
-        name: 'master.tps',
-        component: _pages_Administrator_Master_VotingPlace__WEBPACK_IMPORTED_MODULE_11__["default"]
-      }, {
-        path: 'dpt',
+        path: 'dpt/list',
         name: 'master.dpt',
         component: _pages_Administrator_Master_Voter__WEBPACK_IMPORTED_MODULE_10__["default"]
       }]
@@ -58577,7 +58747,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   {
     path: '*',
     name: '404',
-    component: _pages_Errors_404__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _pages_Errors_404__WEBPACK_IMPORTED_MODULE_11__["default"]
   }]
 });
 router.beforeResolve(function (to, from, next) {
