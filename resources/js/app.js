@@ -32,6 +32,8 @@ Vue.prototype.$role = new Role(role);
 Vue.component('search-box', require('./components/ui/SearchBox.vue').default);
 Vue.component('badge-default', require('./components/ui/badges/BadgeDefault.vue').default);
 Vue.component('button-default', require('./components/ui/buttons/ButtonDefault.vue').default);
+Vue.component('button-success', require('./components/ui/buttons/ButtonSuccess.vue').default);
+Vue.component('button-outline-success', require('./components/ui/buttons/ButtonOutlineSuccess.vue').default);
 Vue.component('button-fly', require('./components/ui/buttons/ButtonFly.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 

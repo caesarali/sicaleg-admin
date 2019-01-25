@@ -42,7 +42,7 @@ const router = new Router({
                 { path: 'coordinators', name: 'admin.coordinators', component: Coordinator },
                 { path: 'master', component: Master,
                     children: [
-                        { path: 'dpt/list', name: 'master.dpt', component: Voter },
+                        { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
                     ]
                 },
             ]

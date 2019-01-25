@@ -1,6 +1,6 @@
 <template>
     <tps-page v-if="query.village_id"></tps-page>
-    <dpt-page v-else-if="query.tps_id"></dpt-page>
+    <dpt-page v-else-if="params.tps_id"></dpt-page>
     <dapil-page v-else></dapil-page>
 </template>
 
@@ -17,6 +17,9 @@ export default {
     computed: {
         query() {
             return this.$route.query
+        },
+        params() {
+            return this.$route.params
         }
     },
 
@@ -28,8 +31,9 @@ export default {
 
     methods: {
         init() {
-            let params = this.$route.query
-            if (Object.keys(params).length) {
+            let params = this.$route.params
+            let query = this.$route.query
+            if (Object.keys(params).length || Object.keys(query).length) {
                 this.$root.back_button = true
             } else {
                 this.$root.back_button = false

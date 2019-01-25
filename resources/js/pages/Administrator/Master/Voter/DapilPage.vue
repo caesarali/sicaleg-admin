@@ -31,7 +31,7 @@
                                         <tr v-for="(item, index) in dapil" :key="item.id">
                                             <td class="text-center">{{ index+1 }}.</td>
                                             <td>
-                                                <router-link :to="item.path">
+                                                <router-link :to="item.path" @click="setMeta">
                                                     {{ item.name }}
                                                 </router-link>
                                             </td>
@@ -83,6 +83,10 @@ export default {
             .then(({ data }) => {
                 this.locations = data.data
             })
+        },
+
+        setMeta() {
+            console.log('asdsad')
         }
     },
 

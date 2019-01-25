@@ -35,7 +35,7 @@
                                         <tr v-for="(item, index) in data" :key="item.id">
                                             <td class="text-center">{{ index+1 }}.</td>
                                             <td>
-                                                <router-link :to="item.path">
+                                                <router-link :to="{ name: 'master.dpt', params: { tps_id: item.id  } }">
                                                     TPS {{ item.name }}
                                                 </router-link>
                                             </td>
@@ -110,7 +110,8 @@ export default {
                 return {
                     id: item.id,
                     name: item.name,
-                    path: this.$route.path + '?' + item.alias + '=' + item.id,
+                    // path: this.$route.path + '/' + item.id,
+                    path: this.$route.path + '/' + item.id,
                 }
             })
             return data.filter(item => {
