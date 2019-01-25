@@ -26,8 +26,9 @@ Route::namespace('API')->group(function () {
         Route::apiResource('dapil', 'DapilController')->only(['index', 'store', 'destroy']);
     });
 
-    Route::namespace('Voter')->group(function () {
+    Route::namespace('Election')->group(function () {
         Route::get('/dpt/list', 'DptController@index');
+        Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
     });
 
     Route::namespace('Laravolt')->group(function () {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Voter\DPT;
+namespace App\Http\Resources\Election;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ByTpsResource extends JsonResource
+class TpsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

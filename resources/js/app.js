@@ -29,6 +29,7 @@ import Role from "./commons/Role";
 let role = document.head.querySelector('meta[name="level"]').content;
 Vue.prototype.$role = new Role(role);
 
+Vue.component('search-box', require('./components/ui/SearchBox.vue').default);
 Vue.component('badge-default', require('./components/ui/badges/BadgeDefault.vue').default);
 Vue.component('button-default', require('./components/ui/buttons/ButtonDefault.vue').default);
 Vue.component('button-fly', require('./components/ui/buttons/ButtonFly.vue').default);
@@ -38,7 +39,9 @@ const app = new Vue({
     el: '#app',
     data() {
         return {
-            env_level: document.head.querySelector('meta[name="env-level"]').content
+            env_level: document.head.querySelector('meta[name="env-level"]').content,
+            back_button: false,
+            keywords: '',
         }
     },
     router

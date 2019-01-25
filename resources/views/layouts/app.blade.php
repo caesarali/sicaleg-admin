@@ -19,7 +19,12 @@
         <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" v-if="!back_button">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <a class="nav-link" href="#" v-on:click="$router.go(-1)" v-else>
+                        <i class="fas fa-arrow-left"></i> <span class="ml-1 d-none d-sm-inline font-weight-bold">Back</span>
+                    </a>
                 </li>
             </ul>
 

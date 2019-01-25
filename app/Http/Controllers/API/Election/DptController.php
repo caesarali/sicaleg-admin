@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API\Voter;
+namespace App\Http\Controllers\API\Election;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Http\Resources\Voter\DPT\ByDapilResource;
-use App\Http\Resources\Voter\DPT\ByTpsResource;
+use App\Http\Resources\Election\DapilResource;
+use App\Http\Resources\Election\TpsResource;
+use App\Http\Resources\Election\DptResource;
 
 use App\Models\CandidateArea;
 use App\Models\City;
@@ -29,15 +30,10 @@ class DptController extends Controller
             $dapil = Village::where('district_id', $request->district_id)->get();
         }
         if ($request->has('village_id')) {
-            return $this->tps($request);
+            $tps = VotingPlace::where('village_id', $request->village_id)->orderBy('name', 'asc')->get();
+            return TpsResource::collection($tps);
         }
 
-        return ByDapilResource::collection($dapil);
-    }
-
-    public function tps(Request $request)
-    {
-        $tps = VotingPlace::where('village_id', $request->village_id)->get();
-        return ByTpsResource::collection($tps);
+        return DapilResource::collection($dapil);
     }
 }
