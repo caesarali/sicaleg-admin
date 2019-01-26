@@ -18,28 +18,29 @@
                                 Daftar Pemilih Tetap
                             </div>
                             <div class="card-body p-0 table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+                                <table class="table table-hover nowrap">
+                                    <thead class="bg-light">
                                         <tr>
-                                            <th class="text-center" width="1%">No.</th>
+                                            <th class="text-center" width="1%">#</th>
                                             <th>Lokasi</th>
-                                            <th class="text-center">Jumlah TPS</th>
-                                            <th class="text-center" colspan="3">Jumlah Pemilih</th>
+                                            <th nowrap class="text-center">Jumlah TPS</th>
+                                            <th nowrap class="text-center" colspan="3">Jumlah Pemilih</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(item, index) in dapil" :key="item.id">
+                                        <tr v-for="(item, index) in data" :key="item.id">
                                             <td class="text-center">{{ index+1 }}.</td>
-                                            <td>
-                                                <router-link :to="item.path" @click="setMeta">
+                                            <td nowrap>
+                                                <router-link :to="item.path">
                                                     {{ item.name }}
                                                 </router-link>
                                             </td>
-                                            <td class="text-center">{{ item.tps }}</td>
-                                            <td class="text-center">L: 0</td>
-                                            <td class="text-center">P: 0</td>
-                                            <td class="text-center">T: 0</td>
+                                            <td nowrap class="text-center">{{ item.tps }}</td>
+                                            <td nowrap class="text-center">L: 0</td>
+                                            <td nowrap class="text-center">P: 0</td>
+                                            <td nowrap class="text-center">T: 0</td>
                                         </tr>
+                                        <row-empty :colspan="6" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
                             </div>
@@ -60,7 +61,7 @@ export default {
     },
 
     computed: {
-        dapil() {
+        data() {
             let data = this.locations.map(item => {
                 return {
                     name: item.name,
@@ -77,16 +78,12 @@ export default {
     methods: {
         init() {
             let params = this.$route.query
-            axios.get('/dpt/list', {
+            axios.get('/dpt', {
                 params: params
             })
             .then(({ data }) => {
                 this.locations = data.data
             })
-        },
-
-        setMeta() {
-            console.log('asdsad')
         }
     },
 

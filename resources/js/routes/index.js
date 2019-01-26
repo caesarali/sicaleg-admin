@@ -18,7 +18,7 @@ import PageNotFound from "../pages/Errors/404";
 
 const router = new Router({
     mode: 'history',
-    // linkActiveClass: "active",
+    linkActiveClass: "active",
     linkExactActiveClass: "active",
     scrollBehavior (to, from) {
         return { x: 0, y: 0 }
@@ -43,6 +43,7 @@ const router = new Router({
                 { path: 'master', component: Master,
                     children: [
                         { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
+                        { path: 'dpt/list/:tps_id/import', name: 'master.dpt.import', component: Voter },
                     ]
                 },
             ]

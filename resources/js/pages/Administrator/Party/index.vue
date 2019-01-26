@@ -158,6 +158,7 @@ export default {
     },
 
     created() {
+        this.$root.back_button = false
         axios.get('/party')
         .then(({ data }) => { this.party = data.data })
         .catch(({ message }) => { toast({ type: 'error', title: message }) })

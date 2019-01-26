@@ -152,6 +152,7 @@ export default {
 
     created() {
         axios.all([this.getProfile(), this.getProvinces()]);
+        this.$root.back_button = false;
     }
 }
 </script>

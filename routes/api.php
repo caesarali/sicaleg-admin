@@ -27,7 +27,7 @@ Route::namespace('API')->group(function () {
     });
 
     Route::namespace('Election')->group(function () {
-        Route::get('/dpt/list', 'DptController@index');
+        Route::apiResource('dpt', 'DptController')->only(['index', 'store', 'update', 'destroy']);
         Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
     });
 

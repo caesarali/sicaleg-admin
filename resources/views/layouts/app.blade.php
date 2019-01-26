@@ -89,12 +89,6 @@
                                 <p class="ml-1">PARTAI</p>
                             </router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'admin.coordinators' }" class="nav-link close-sidebar">
-                                <i class="fas fa-users nav-icon"></i>
-                                <p class="ml-1">KORDINATOR</p>
-                            </router-link>
-                        </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-database"></i>

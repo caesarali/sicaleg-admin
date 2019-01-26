@@ -7,8 +7,8 @@
                         <search-box></search-box>
                     </div>
                     <div class="col-auto">
-                        <button-default :click="create">
-                            Create
+                        <button-default :click="create" class="app-shadow">
+                            <i class="fas fa-plus"></i>
                         </button-default>
                     </div>
                 </div>
@@ -23,31 +23,33 @@
                                 Daftar Pemilih Tetap
                             </div>
                             <div class="card-body p-0 table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+                                <table class="table table-hover nowrap">
+                                    <thead class="bg-light">
                                         <tr>
-                                            <th class="text-center" width="1%">No.</th>
-                                            <th>TPS</th>
-                                            <th class="text-center" colspan="3">Jumlah Pemilih</th>
+                                            <th nowrap class="text-center" width="1%">#</th>
+                                            <th nowrap>TPS</th>
+                                            <th nowrap class="text-center" colspan="3">Jumlah Pemilih</th>
+                                            <th nowrap></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(item, index) in data" :key="item.id">
                                             <td class="text-center">{{ index+1 }}.</td>
-                                            <td>
+                                            <td nowrap>
                                                 <router-link :to="{ name: 'master.dpt', params: { tps_id: item.id  } }">
                                                     TPS {{ item.name }}
                                                 </router-link>
                                             </td>
-                                            <td class="text-center" width="10%">L: 0</td>
-                                            <td class="text-center" width="10%">P: 0</td>
-                                            <td class="text-center" width="10%">Total: 0</td>
+                                            <td nowrap class="text-center" width="10%">L: 0</td>
+                                            <td nowrap class="text-center" width="10%">P: 0</td>
+                                            <td nowrap class="text-center" width="10%">Total: 0</td>
                                             <td class="text-right">
-                                            <a href="#" @click.prevent="destroy(index, item.id)" class="text-secondary ml-2">
-                                                <i class="far fa-trash-alt"></i>
-                                            </a>
-                                        </td>
+                                                <a href="#" @click.prevent="destroy(index, item.id)" class="text-secondary ml-2">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </a>
+                                            </td>
                                         </tr>
+                                        <row-empty :colspan="6" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
                             </div>
@@ -110,7 +112,6 @@ export default {
                 return {
                     id: item.id,
                     name: item.name,
-                    // path: this.$route.path + '/' + item.id,
                     path: this.$route.path + '/' + item.id,
                 }
             })
@@ -123,7 +124,7 @@ export default {
     methods: {
         init() {
             let params = this.$route.query
-            axios.get('/dpt/list', {
+            axios.get('/dpt', {
                 params: params
             })
             .then(({ data }) => {
