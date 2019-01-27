@@ -3,8 +3,10 @@
 namespace App\Http\Resources\Election;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\VotingPlace;
+use App\Models\Voter;
 
 class DapilResource extends JsonResource
 {
@@ -16,12 +18,17 @@ class DapilResource extends JsonResource
      */
     public function toArray($request)
     {
+        $tps = VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id);
+        $tps_id = $tps->pluck('id');
+        $voters = Voter::whereIn('locationable_id', $tps_id)->get();
         return [
             'id' => $this->locationable->id ?? $this->id,
             'alias' => $this->locationable->alias ?? $this->alias,
             'name' => $this->locationable->name ?? $this->name,
             'parent' => $this->locationable->parent->name ?? $this->parent->name,
-            'tpsCount' => VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id)->count()
+            'tps' => $tps->count(),
+            'male' => $voters->where('gender', 'l')->count(),
+            'female' => $voters->where('gender', 'p')->count(),
         ];
     }
 }

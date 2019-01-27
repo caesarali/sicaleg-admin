@@ -40,9 +40,9 @@
                                                     TPS {{ item.name }}
                                                 </router-link>
                                             </td>
-                                            <td nowrap class="text-center" width="10%">L: 0</td>
-                                            <td nowrap class="text-center" width="10%">P: 0</td>
-                                            <td nowrap class="text-center" width="10%">Total: 0</td>
+                                            <td nowrap class="text-center" width="10%">L: {{ item.male }}</td>
+                                            <td nowrap class="text-center" width="10%">P: {{ item.female }}</td>
+                                            <td nowrap class="text-center" width="10%">Total: {{ item.total }}</td>
                                             <td class="text-right">
                                                 <a href="#" @click.prevent="destroy(index, item.id)" class="text-secondary ml-2">
                                                     <i class="far fa-trash-alt"></i>
@@ -112,6 +112,9 @@ export default {
                 return {
                     id: item.id,
                     name: item.name,
+                    male: item.male,
+                    female: item.female,
+                    total: item.male + item.female,
                     path: this.$route.path + '/' + item.id,
                 }
             })

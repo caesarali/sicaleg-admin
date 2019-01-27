@@ -36,9 +36,9 @@
                                                 </router-link>
                                             </td>
                                             <td nowrap class="text-center">{{ item.tps }}</td>
-                                            <td nowrap class="text-center">L: 0</td>
-                                            <td nowrap class="text-center">P: 0</td>
-                                            <td nowrap class="text-center">T: 0</td>
+                                            <td nowrap class="text-center" width="10%">L: {{ item.male }}</td>
+                                            <td nowrap class="text-center" width="10%">P: {{ item.female }}</td>
+                                            <td nowrap class="text-center" width="10%">Total: {{ item.total }}</td>
                                         </tr>
                                         <row-empty :colspan="6" v-if="!data.length"></row-empty>
                                     </tbody>
@@ -65,7 +65,10 @@ export default {
             let data = this.locations.map(item => {
                 return {
                     name: item.name,
-                    tps: item.tpsCount,
+                    tps: item.tps,
+                    male: item.male,
+                    female: item.female,
+                    total: item.male + item.female,
                     path: this.$route.path + '?' + item.alias + '=' + item.id
                 }
             })

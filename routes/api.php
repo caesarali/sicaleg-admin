@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/pretty-json', function () {
+    $jsonString = file_get_contents(asset('dpt/listDps.json'));
+    $data = json_decode($jsonString, true);
+    dd($data);
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

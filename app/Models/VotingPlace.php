@@ -33,6 +33,10 @@ class VotingPlace extends Model
         return $this->belongsTo(Village::class);
     }
 
+    public function voters() {
+        return $this->morphMany(Voter::class, 'locationable');
+    }
+
     public function parent() {
         return $this->village();
     }

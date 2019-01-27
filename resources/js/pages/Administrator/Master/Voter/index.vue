@@ -33,7 +33,7 @@ export default {
         init() {
             let params = this.$route.params
             let query = this.$route.query
-            if (Object.keys(params).length || Object.keys(query).length) {
+            if (Object.keys(params).length && params.tps_id != undefined || Object.keys(query).length) {
                 this.$root.back_button = true
             } else {
                 this.$root.back_button = false

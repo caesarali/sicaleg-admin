@@ -2478,7 +2478,10 @@ __webpack_require__.r(__webpack_exports__);
       var data = this.locations.map(function (item) {
         return {
           name: item.name,
-          tps: item.tpsCount,
+          tps: item.tps,
+          male: item.male,
+          female: item.female,
+          total: item.male + item.female,
           path: _this.$route.path + '?' + item.alias + '=' + item.id
         };
       });
@@ -3149,6 +3152,9 @@ __webpack_require__.r(__webpack_exports__);
         return {
           id: item.id,
           name: item.name,
+          male: item.male,
+          female: item.female,
+          total: item.male + item.female,
           path: _this.$route.path + '/' + item.id
         };
       });
@@ -3275,7 +3281,7 @@ __webpack_require__.r(__webpack_exports__);
       var params = this.$route.params;
       var query = this.$route.query;
 
-      if (Object.keys(params).length || Object.keys(query).length) {
+      if (Object.keys(params).length && params.tps_id != undefined || Object.keys(query).length) {
         this.$root.back_button = true;
       } else {
         this.$root.back_button = false;
@@ -44353,27 +44359,27 @@ var render = function() {
                             "td",
                             {
                               staticClass: "text-center",
-                              attrs: { nowrap: "" }
+                              attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("L: 0")]
+                            [_vm._v("L: " + _vm._s(item.male))]
                           ),
                           _vm._v(" "),
                           _c(
                             "td",
                             {
                               staticClass: "text-center",
-                              attrs: { nowrap: "" }
+                              attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("P: 0")]
+                            [_vm._v("P: " + _vm._s(item.female))]
                           ),
                           _vm._v(" "),
                           _c(
                             "td",
                             {
                               staticClass: "text-center",
-                              attrs: { nowrap: "" }
+                              attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("T: 0")]
+                            [_vm._v("Total: " + _vm._s(item.total))]
                           )
                         ])
                       }),
@@ -45959,7 +45965,7 @@ var render = function() {
                               staticClass: "text-center",
                               attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("L: 0")]
+                            [_vm._v("L: " + _vm._s(item.male))]
                           ),
                           _vm._v(" "),
                           _c(
@@ -45968,7 +45974,7 @@ var render = function() {
                               staticClass: "text-center",
                               attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("P: 0")]
+                            [_vm._v("P: " + _vm._s(item.female))]
                           ),
                           _vm._v(" "),
                           _c(
@@ -45977,7 +45983,7 @@ var render = function() {
                               staticClass: "text-center",
                               attrs: { nowrap: "", width: "10%" }
                             },
-                            [_vm._v("Total: 0")]
+                            [_vm._v("Total: " + _vm._s(item.total))]
                           ),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-right" }, [

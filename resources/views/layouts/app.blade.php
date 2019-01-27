@@ -76,11 +76,11 @@
                                 </router-link>
                             </li>
                         @endrole
-                        <li class="nav-header">ADMIN MENU</li>
+                        <li class="nav-header">CALEG</li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'admin.candidate' }" class="nav-link close-sidebar">
                                 <i class="fas fa-user-tie nav-icon"></i>
-                                <p class="ml-1">CALEG</p>
+                                <p class="ml-1">PROFIL</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
@@ -91,9 +91,9 @@
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-database"></i>
-                                <p>
-                                    MASTER
+                                <i class="nav-icon fas fa-users"></i>
+                                <p class="ml-1">
+                                    TEAM
                                     <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -101,10 +101,23 @@
                                 <li class="nav-item">
                                     <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>DPT</p>
+                                        <p>Kordinator</p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Relawan</p>
                                     </router-link>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-header">PEMILU</li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
+                                <i class="fas fa-database nav-icon"></i>
+                                <p class="ml-1">DPT</p>
+                            </router-link>
                         </li>
                     </ul>
                 </nav>
