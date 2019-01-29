@@ -37,6 +37,10 @@ Route::namespace('API')->group(function () {
         Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
     });
 
+    Route::namespace('Team')->group(function () {
+        Route::apiResource('volunteers', 'VolunteerController');
+    });
+
     Route::namespace('Laravolt')->group(function () {
         Route::apiResource('provinces', 'ProvinceController')->except('show');
     });

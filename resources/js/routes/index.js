@@ -9,9 +9,13 @@ import Administrator from "../pages/Administrator";
 import Dashboard from "../pages/Administrator/Dashboard";
 import Candidate from "../pages/Administrator/Candidate";
 import Party from "../pages/Administrator/Party";
-import Coordinator from "../pages/Administrator/Coordinator";
+
 import Master from "../pages/Administrator/Master";
 import Voter from "../pages/Administrator/Master/Voter";
+
+import Team from "../pages/Administrator/Team";
+import Coordinator from "../pages/Administrator/Team/Coordinator";
+import Volunteer from "../pages/Administrator/Team/Volunteer";
 
 // Error Page Components
 import PageNotFound from "../pages/Errors/404";
@@ -39,11 +43,16 @@ const router = new Router({
                 { path: 'dashboard', name: 'admin.dashboard', component: Dashboard },
                 { path: 'candidate', name: 'admin.candidate', component: Candidate },
                 { path: 'party', name: 'admin.party', component: Party },
-                { path: 'coordinators', name: 'admin.coordinators', component: Coordinator },
                 { path: 'master', component: Master,
                     children: [
                         { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
                         { path: 'dpt/list/:tps_id/import', name: 'master.dpt.import', component: Voter },
+                    ]
+                },
+                { path: 'team', component: Team,
+                    children: [
+                        { path: 'coordinators', name: 'team.coordinators', component: Coordinator },
+                        { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
                     ]
                 },
             ]

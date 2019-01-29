@@ -1,19 +1,14 @@
 <template>
-    <tps-page v-if="query.village_id"></tps-page>
-    <dpt-page v-else-if="params.tps_id"></dpt-page>
-    <dapil-page v-else></dapil-page>
+    <list-relawan v-if="query.village_id"></list-relawan>
+    <list-dapil v-else></list-dapil>
 </template>
 
-
 <script>
-import DapilPage from "./DapilPage";
-import TpsPage from "./TpsPage";
-import DptPage from "./DptPage";
-export default {
-    components: {
-        DapilPage, TpsPage, DptPage
-    },
+import ListRelawan from "./ListRelawan";
+import ListDapil from "./ListDapil";
 
+export default {
+    components: { ListDapil, ListRelawan },
     computed: {
         query() {
             return this.$route.query
@@ -46,10 +41,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-    .table thead th {
-        vertical-align: middle !important;
-    }
-</style>
-

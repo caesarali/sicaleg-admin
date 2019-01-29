@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Election;
+namespace App\Http\Resources\Team;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Models\Voter;
+use App\Models\VotingPlace;
 
-class TpsResource extends JsonResource
+class DapilResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,8 +21,8 @@ class TpsResource extends JsonResource
             'alias' => $this->locationable->alias ?? $this->alias,
             'name' => $this->locationable->name ?? $this->name,
             'parent' => $this->locationable->parent->name ?? $this->parent->name,
-            'male' => $this->voters->where('gender', 'l')->count(),
-            'female' => $this->voters->where('gender', 'p')->count(),
+            'tps' => VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id)->count(),
+            'volunteers' => 0
         ];
     }
 }

@@ -99,13 +99,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
+                                    <router-link :to="{ name: 'team.coordinators' }" class="nav-link close-sidebar">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Kordinator</p>
                                     </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
+                                    <router-link :to="{ name: 'team.volunteers' }" class="nav-link close-sidebar">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Relawan</p>
                                     </router-link>
