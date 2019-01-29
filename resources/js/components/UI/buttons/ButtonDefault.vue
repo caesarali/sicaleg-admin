@@ -17,3 +17,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .rounded-circle {
+        padding-left: 11px !important;
+        padding-right: 11px !important;
+    }
+</style>

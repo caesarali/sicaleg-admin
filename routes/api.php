@@ -38,10 +38,18 @@ Route::namespace('API')->group(function () {
     });
 
     Route::namespace('Team')->group(function () {
-        Route::apiResource('volunteers', 'VolunteerController');
+        Route::apiResource('volunteers', 'VolunteerController')->except(['show']);
+        Route::apiResource('coordinators', 'CoordinatorController')->except(['show']);
     });
 
     Route::namespace('Laravolt')->group(function () {
         Route::apiResource('provinces', 'ProvinceController')->except('show');
+    });
+
+    Route::get('/city/{id}', function ($id) {
+        return Indonesia::findCity($id, ['districts']);
+    });
+    Route::get('/district/{id}', function ($id) {
+        return Indonesia::findDistrict($id, ['villages']);
     });
 });
