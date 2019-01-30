@@ -21099,9 +21099,9 @@ body {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16) !important;
 }
 
-.modal-fullscreen {
-  max-height: calc(100vh - 210px);
-  overflow: auto;
+.modal-body {
+  max-height: calc(100vh - 210px) !important;
+  overflow: auto !important;
 }
 
 @media only screen and (max-width: 700px) {
@@ -21119,9 +21119,9 @@ body {
     border-radius: 0 !important;
   }
 
-  .modal-fullscreen {
-    max-height: calc(100vh - 130px);
-    overflow-y: auto;
+  .modal-body {
+    max-height: calc(100vh - 130px) !important;
+    overflow-y: auto !important;
   }
 }
 

@@ -79,109 +79,111 @@
                         </button>
                     </div>
                     <form @submit.prevent="editmode ? update() : store()">
-                        <div class="modal-header bg-light border-0">
-                            <h5 class="modal-title">Informasi Diri</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="kk">No. KK <span class="text-danger">*</span></label>
-                                        <input v-model="form.kk" id="kk" type="text" maxlength="16" class="form-control" :class="{ 'is-invalid': form.errors.has('kk') }" name="kk" placeholder="Nomor Kartu Keluarga...">
-                                        <has-error :form="form" field="kk"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nik">NIK <span class="text-danger">*</span></label>
-                                        <input v-model="form.nik" id="nik" type="text" maxlength="16" class="form-control" :class="{ 'is-invalid': form.errors.has('nik') }" name="nik" placeholder="Nomor Induk Kependudukan...">
-                                        <has-error :form="form" field="nik"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Nama <span class="text-danger">*</span></label>
-                                        <input v-model="form.name" id="name" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" name="name" placeholder="Nama sesuai KTP..">
-                                        <has-error :form="form" field="name"></has-error>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label for="birth_place">Tempat Lahir <span class="text-danger">*</span></label>
-                                                <input v-model="form.birth_place" id="birth_place" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('birth_place') }" name="birth_place" placeholder="Tempat Kelahiran..">
-                                                <has-error :form="form" field="birth_place"></has-error>
+                        <div class="modal-body p-0">
+                            <div class="p-3 bg-light border-0">
+                                <h5 class="modal-title">Informasi Diri</h5>
+                            </div>
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="kk">No. KK <span class="text-danger">*</span></label>
+                                            <input v-model="form.kk" id="kk" type="text" maxlength="16" class="form-control" :class="{ 'is-invalid': form.errors.has('kk') }" name="kk" placeholder="Nomor Kartu Keluarga...">
+                                            <has-error :form="form" field="kk"></has-error>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nik">NIK <span class="text-danger">*</span></label>
+                                            <input v-model="form.nik" id="nik" type="text" maxlength="16" class="form-control" :class="{ 'is-invalid': form.errors.has('nik') }" name="nik" placeholder="Nomor Induk Kependudukan...">
+                                            <has-error :form="form" field="nik"></has-error>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Nama <span class="text-danger">*</span></label>
+                                            <input v-model="form.name" id="name" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" name="name" placeholder="Nama sesuai KTP..">
+                                            <has-error :form="form" field="name"></has-error>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label for="birth_place">Tempat Lahir <span class="text-danger">*</span></label>
+                                                    <input v-model="form.birth_place" id="birth_place" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('birth_place') }" name="birth_place" placeholder="Tempat Kelahiran..">
+                                                    <has-error :form="form" field="birth_place"></has-error>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label for="birth_date">Tgl. Lahir <span class="text-danger">*</span></label>
+                                                    <input v-model="form.birth_date" id="birth_date" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('birth_date') }" name="birth_date" placeholder="Tanggal Lahir..">
+                                                    <has-error :form="form" field="birth_date"></has-error>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label for="birth_date">Tgl. Lahir <span class="text-danger">*</span></label>
-                                                <input v-model="form.birth_date" id="birth_date" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('birth_date') }" name="birth_date" placeholder="Tanggal Lahir..">
-                                                <has-error :form="form" field="birth_date"></has-error>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="marital_status">Status Pernikahan <span class="text-danger">*</span></label>
+                                            <select name="marital_status" v-model="form.marital_status" id="marital_status" class="form-control" :class="{ 'is-invalid': form.errors.has('marital_status') }">
+                                                <option value="b">Belum Menikah</option>
+                                                <option value="s">Sudah Menikah</option>
+                                                <option value="p">Pernah Menikah</option>
+                                            </select>
+                                            <has-error :form="form" field="marital_status"></has-error>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="marital_status">Status Pernikahan <span class="text-danger">*</span></label>
-                                        <select name="marital_status" v-model="form.marital_status" id="marital_status" class="form-control" :class="{ 'is-invalid': form.errors.has('marital_status') }">
-                                            <option value="b">Belum Menikah</option>
-                                            <option value="s">Sudah Menikah</option>
-                                            <option value="p">Pernah Menikah</option>
-                                        </select>
-                                        <has-error :form="form" field="marital_status"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="gender">Jenis Kelamin <span class="text-danger">*</span></label>
-                                        <select name="gender" v-model="form.gender" id="gender" class="form-control" :class="{ 'is-invalid': form.errors.has('gender') }">
-                                            <option value="l">Laki-laki</option>
-                                            <option value="p">Perempuan</option>
-                                        </select>
-                                        <has-error :form="form" field="gender"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="disability_id">Disabilitas</label>
-                                        <select name="disability_id" v-model="form.disability_id" id="disability_id" class="form-control" :class="{ 'is-invalid': form.errors.has('disability_id') }">
-                                            <option :value="editmode ? null : ''">Normal</option>
-                                            <option v-for="disability in disabilities" :key="disability.id" :value="disability.id">{{ disability.name }}</option>
-                                        </select>
-                                        <has-error :form="form" field="disability_id"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="information">Keterangan</label>
-                                        <input v-model="form.information" id="information" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('information') }" name="information" placeholder="Keterangan (Optional)...">
-                                        <has-error :form="form" field="information"></has-error>
+                                        <div class="form-group">
+                                            <label for="gender">Jenis Kelamin <span class="text-danger">*</span></label>
+                                            <select name="gender" v-model="form.gender" id="gender" class="form-control" :class="{ 'is-invalid': form.errors.has('gender') }">
+                                                <option value="l">Laki-laki</option>
+                                                <option value="p">Perempuan</option>
+                                            </select>
+                                            <has-error :form="form" field="gender"></has-error>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="disability_id">Disabilitas</label>
+                                            <select name="disability_id" v-model="form.disability_id" id="disability_id" class="form-control" :class="{ 'is-invalid': form.errors.has('disability_id') }">
+                                                <option :value="editmode ? null : ''">Normal</option>
+                                                <option v-for="disability in disabilities" :key="disability.id" :value="disability.id">{{ disability.name }}</option>
+                                            </select>
+                                            <has-error :form="form" field="disability_id"></has-error>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="information">Keterangan</label>
+                                            <input v-model="form.information" id="information" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('information') }" name="information" placeholder="Keterangan (Optional)...">
+                                            <has-error :form="form" field="information"></has-error>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-header bg-light border-0">
-                            <h5 class="modal-title">Informasi Alamat</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="addr_street">Jalan / Dusun</label>
-                                        <input v-model="form.addr_street" id="addr_street" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_street') }" name="addr_street" placeholder="* Jalan / Dusun..">
-                                        <has-error :form="form" field="addr_street"></has-error>
+                            <div class="p-3 bg-light border-0">
+                                <h5 class="modal-title">Informasi Alamat</h5>
+                            </div>
+                            <div class="p-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="addr_street">Jalan / Dusun</label>
+                                            <input v-model="form.addr_street" id="addr_street" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_street') }" name="addr_street" placeholder="* Jalan / Dusun..">
+                                            <has-error :form="form" field="addr_street"></has-error>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="addr_rt">RT</label>
-                                        <input v-model="form.addr_rt" id="addr_rt" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_rt') }" name="addr_rt" placeholder="* RT..">
-                                        <has-error :form="form" field="addr_rt"></has-error>
+                                    <div class="col-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="addr_rt">RT</label>
+                                            <input v-model="form.addr_rt" id="addr_rt" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_rt') }" name="addr_rt" placeholder="* RT..">
+                                            <has-error :form="form" field="addr_rt"></has-error>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="addr_rw">RW</label>
-                                        <input v-model="form.addr_rw" id="addr_rw" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_rw') }" name="addr_rw" placeholder="* RW..">
-                                        <has-error :form="form" field="addr_rw"></has-error>
+                                    <div class="col-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="addr_rw">RW</label>
+                                            <input v-model="form.addr_rw" id="addr_rw" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('addr_rw') }" name="addr_rw" placeholder="* RW..">
+                                            <has-error :form="form" field="addr_rw"></has-error>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer border-top-0 bg-light">
-                            <button type="button" class="btn btn-secondary btn-sm d-none d-sm-inline-block" data-dismiss="modal">Batal</button>
-                            <button-default type="submit" :disabled="form.busy" class="btn-sm btn-block-xs">
+                            <button type="button" class="btn btn-secondary d-none d-sm-inline-block" data-dismiss="modal">Batal</button>
+                            <button-default type="submit" :disabled="form.busy" class="btn-block-xs">
                                 <i class="fas fa-check mr-1"></i> Simpan
                             </button-default>
                         </div>
