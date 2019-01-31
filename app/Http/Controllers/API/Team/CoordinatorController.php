@@ -9,6 +9,8 @@ use App\Http\Resources\Auth\RoleResource;
 use App\Http\Resources\Team\CoordinatorResource;
 use App\Http\Resources\Team\DapilResource;
 
+use App\Http\Requests\API\Team\CoordinatorRequest;
+
 use App\Models\CandidateArea;
 use App\Models\City;
 use App\Models\District;
@@ -37,7 +39,7 @@ class CoordinatorController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CoordinatorRequest $request)
     {
         $request->validate([
             'name' => 'required|string|max:50',
@@ -49,10 +51,17 @@ class CoordinatorController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
             'role' => 'required|string',
-            'city' => 'required|integer',
-            'district' => 'required|integer',
-            'village' => 'required|integer',
+            'city_id' => 'required|integer',
         ]);
+
+        if ($request->role == 'district-co') {
+            $request->validate(['district_id' => 'required|integer']);
+        }
+
+        if ($request->role == 'village-co') {
+            $request->validate(['district_id' => 'required|integer']);
+            $request->validate(['village_id' => 'required|integer']);
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -64,13 +73,13 @@ class CoordinatorController extends Controller
 
         switch ($request->role) {
             case 'city-co':
-                $locationable = City::find($request->city);
+                $locationable = City::find($request->city_id);
                 break;
             case 'district-co':
-                $locationable = District::find($request->district);
+                $locationable = District::find($request->district_id);
                 break;
             case 'village-co':
-                $locationable = Village::find($request->village);
+                $locationable = Village::find($request->village_id);
                 break;
         }
         $request->request->add([

@@ -30,32 +30,31 @@
                                             <th width="1%">#</th>
                                             <th>Nama</th>
                                             <th nowrap>No. HP</th>
-                                            <th>Tugas</th>
+                                            <th nowrap>Tugas / Peran</th>
                                             <th>Wilayah</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- <tr v-for="(item, index) in data" :key="item.id">
+                                        <tr v-for="(item, index) in data" :key="item.id">
                                             <td>{{ index+1 }}.</td>
-                                            <td nowrap>{{ item.tps }}</td>
                                             <td nowrap>
-                                                <a href="#" @click.prevent="edit(volunteers[index], index)">
+                                                <a href="#" @click.prevent="edit(coordinators[index], index)">
                                                     {{ item.name }}
                                                 </a>
                                             </td>
-                                            <td nowrap>{{ item.nik }}</td>
-                                            <td nowrap>{{ item.address }}</td>
                                             <td nowrap>{{ item.phone }}</td>
+                                            <td nowrap>{{ item.role.name }}</td>
+                                            <td nowrap>{{ item.location }}</td>
                                             <td nowrap class="text-right">
-                                                <a href="#" @click.prevent="edit(volunteers[index], index)" class="text-secondary mx-2">
+                                                <a href="#" @click.prevent="edit(coordinators[index], index)" class="text-secondary mx-2">
                                                     <i class="far fa-edit"></i>
                                                 </a>
                                                 <a href="#" @click.prevent="destroy(index, item.id)" class="text-secondary ml-2">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
                                             </td>
-                                        </tr> -->
+                                        </tr>
                                         <row-empty :colspan="6" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
@@ -70,50 +69,13 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Lokasi</h5>
+                        <h5 class="modal-title">Data Kordinator</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form @submit.prevent="editmode ? update() : store()">
                         <div class="modal-body p-0">
-                            <div class="p-3">
-                                <div class="row">
-                                    <div class="col-md" v-if="$root.env_level == 'dpr'">
-                                        <div class="form-group">
-                                            <label for="city">Kabupaten / Kota <span class="text-danger">*</span></label>
-                                            <select v-model="form.city" name="city" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('city') }">
-                                                <option value="" hidden>Pilih:</option>
-                                                <option v-for="item in locations.cities" :key="item.id" :value="item.id">{{ item.name }}</option>
-                                            </select>
-                                            <has-error :form="form" field="city"></has-error>
-                                        </div>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="form-group">
-                                            <label for="district">Kecamatan <span class="text-danger">*</span></label>
-                                            <select :disabled="!form.city && $root.env_level == 'dpr'" v-model="form.district" name="district" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('district') }">
-                                                <option value="" hidden>Pilih:</option>
-                                                <option v-for="item in locations.districts" :key="item.id" :value="item.id">{{ item.name }}</option>
-                                            </select>
-                                            <has-error :form="form" field="district"></has-error>
-                                        </div>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="form-group">
-                                            <label for="village">Desa / Kelurahan <span class="text-danger">*</span></label>
-                                            <select :disabled="!form.district" v-model="form.village" name="village" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('village') }">
-                                                <option value="" hidden>Pilih:</option>
-                                                <option v-for="item in locations.villages" :key="item.id" :value="item.id">{{ item.name }}</option>
-                                            </select>
-                                            <has-error :form="form" field="village"></has-error>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-light p-3">
-                                <h5 class="modal-title">Data Relawan</h5>
-                            </div>
                             <div class="p-3">
                                 <div class="row">
                                     <div class="col-md">
@@ -155,6 +117,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <template v-if="form.role">
+                                <div class="bg-light p-3">
+                                    <h5 class="modal-title">Lokasi</h5>
+                                </div>
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="col-md" v-if="$root.env_level == 'dpr'">
+                                            <div class="form-group">
+                                                <label for="city_id">Kabupaten / Kota <span class="text-danger">*</span></label>
+                                                <select v-model="form.city_id" name="city_id" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('city_id') }">
+                                                    <option value="" hidden>Pilih:</option>
+                                                    <option v-for="item in locations.cities" :key="item.id" :value="item.id">{{ item.name }}</option>
+                                                </select>
+                                                <has-error :form="form" field="city_id"></has-error>
+                                            </div>
+                                        </div>
+                                        <div class="col-md" v-if="form.role == 'district-co' || form.role == 'village-co'">
+                                            <div class="form-group">
+                                                <label for="district_id">Kecamatan <span class="text-danger">*</span></label>
+                                                <select :disabled="!form.city_id && $root.env_level == 'dpr'" v-model="form.district_id" name="district_id" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('district_id') }">
+                                                    <option value="" hidden>Pilih:</option>
+                                                    <option v-for="item in locations.districts" :key="item.id" :value="item.id">{{ item.name }}</option>
+                                                </select>
+                                                <has-error :form="form" field="district_id"></has-error>
+                                            </div>
+                                        </div>
+                                        <div class="col-md" v-if="form.role == 'village-co'">
+                                            <div class="form-group">
+                                                <label for="village_id">Desa / Kelurahan <span class="text-danger">*</span></label>
+                                                <select :disabled="!form.district_id" v-model="form.village_id" name="village_id" id="tps" class="form-control" :class="{ 'is-invalid': form.errors.has('village_id') }">
+                                                    <option value="" hidden>Pilih:</option>
+                                                    <option v-for="item in locations.villages" :key="item.id" :value="item.id">{{ item.name }}</option>
+                                                </select>
+                                                <has-error :form="form" field="village_id"></has-error>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
                             <template v-if="!editmode">
                                 <div class="bg-light p-3">
                                     <h5 class="modal-title">Akun Relawan</h5>
@@ -217,9 +218,9 @@ export default {
                 email: '',
                 password: '',
                 role: '',
-                city: '',
-                district: '',
-                village: '',
+                city_id: '',
+                district_id: '',
+                village_id: '',
             }),
             endpoint: '/coordinators'
         }
@@ -230,31 +231,31 @@ export default {
             return this.coordinators.map(item => {
                 return {
                     id: item.id,
-                    tps: item.tps,
                     name: item.name,
-                    nik: item.nik,
-                    address: item.address,
                     phone: item.phone,
-                    information: item.information
+                    role: this.roles.filter(role => {
+                        return role.code == item.role
+                    })[0],
+                    location: item.location
                 }
             })
         }
     },
 
     watch: {
-        'form.city'(value) {
+        'form.city_id'(value) {
             axios.get('/city/' + value)
             .then(({ data }) => {
                 this.locations.districts = data.districts
-                this.form.district = ''
-                this.form.village = ''
+                this.form.district_id = ''
+                this.form.village_id = ''
             })
         },
-        'form.district'(value) {
+        'form.district_id'(value) {
             axios.get('/district/' + value)
             .then(({ data }) => {
                 this.locations.villages = data.villages
-                this.form.village = ''
+                this.form.village_id = ''
             })
         }
     },
@@ -292,8 +293,23 @@ export default {
             })
             .catch(() => {})
         },
-        edit(data, index) {},
-        update() {},
+        edit(data, index) {
+            this.editmode = true
+            this.form.reset()
+            this.form.clear()
+            this.form.fill(data)
+            this.form.index = index
+            this.modal('show')
+        },
+        update() {
+            this.form.patch(this.endpoint + '/' + this.form.id)
+            .then(({ data }) => {
+                this.dpt.splice(this.form.index, 1, data.data);
+                this.modal('hide')
+                toast({type: 'success', text: data.message})
+            })
+            .catch(() => {})
+        },
         destroy(index, id) {
             this.$confirm.delete().then((result) => {
                 if (result.value) {

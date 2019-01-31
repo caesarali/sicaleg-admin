@@ -3714,6 +3714,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3737,64 +3738,66 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: '',
         role: '',
-        city: '',
-        district: '',
-        village: ''
+        city_id: '',
+        district_id: '',
+        village_id: ''
       }),
       endpoint: '/coordinators'
     };
   },
   computed: {
     data: function data() {
+      var _this = this;
+
       return this.coordinators.map(function (item) {
         return {
           id: item.id,
-          tps: item.tps,
           name: item.name,
-          nik: item.nik,
-          address: item.address,
           phone: item.phone,
-          information: item.information
+          role: _this.roles.filter(function (role) {
+            return role.code == item.role;
+          })[0],
+          location: item.location
         };
       });
     }
   },
   watch: {
-    'form.city': function formCity(value) {
-      var _this = this;
+    'form.city_id': function formCity_id(value) {
+      var _this2 = this;
 
       axios.get('/city/' + value).then(function (_ref) {
         var data = _ref.data;
-        _this.locations.districts = data.districts;
-        _this.form.district = '';
-        _this.form.village = '';
+        _this2.locations.districts = data.districts;
+        _this2.form.district_id = '';
+        _this2.form.village_id = '';
       });
     },
-    'form.district': function formDistrict(value) {
-      var _this2 = this;
+    'form.district_id': function formDistrict_id(value) {
+      var _this3 = this;
 
       axios.get('/district/' + value).then(function (_ref2) {
         var data = _ref2.data;
-        _this2.locations.villages = data.villages;
-        _this2.form.village = '';
+        _this3.locations.villages = data.villages;
+        _this3.form.village_id = '';
       });
     }
   },
   methods: {
     init: function init() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get(this.endpoint, {
         params: this.query
       }).then(function (_ref3) {
         var data = _ref3.data;
-        _this3.coordinators = data.data;
-        _this3.roles = data.roles;
+        _this4.coordinators = data.data;
+        _this4.roles = data.roles;
 
-        if (_this3.$root.env_level == 'dpr') {
-          _this3.locations.cities = data.dapil;
+        if (_this4.$root.env_level == 'dpr') {
+          _this4.locations.cities = data.dapil;
         } else {
-          _this3.locations.districts = data.dapil;
+          _this4.locations.districts = data.dapil;
         }
       });
     },
@@ -3808,14 +3811,14 @@ __webpack_require__.r(__webpack_exports__);
       this.modal('show');
     },
     store: function store() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.form.post(this.endpoint).then(function (_ref4) {
         var data = _ref4.data;
 
-        _this4.coordinators.push(data.data);
+        _this5.coordinators.push(data.data);
 
-        _this4.modal('hide');
+        _this5.modal('hide');
 
         toast({
           type: 'success',
@@ -3823,17 +3826,39 @@ __webpack_require__.r(__webpack_exports__);
         });
       }).catch(function () {});
     },
-    edit: function edit(data, index) {},
-    update: function update() {},
+    edit: function edit(data, index) {
+      this.editmode = true;
+      this.form.reset();
+      this.form.clear();
+      this.form.fill(data);
+      this.form.index = index;
+      this.modal('show');
+    },
+    update: function update() {
+      var _this6 = this;
+
+      this.form.patch(this.endpoint + '/' + this.form.id).then(function (_ref5) {
+        var data = _ref5.data;
+
+        _this6.dpt.splice(_this6.form.index, 1, data.data);
+
+        _this6.modal('hide');
+
+        toast({
+          type: 'success',
+          text: data.message
+        });
+      }).catch(function () {});
+    },
     destroy: function destroy(index, id) {
-      var _this5 = this;
+      var _this7 = this;
 
       this.$confirm.delete().then(function (result) {
         if (result.value) {
-          _this5.form.delete(_this5.endpoint + '/' + id).then(function (_ref5) {
-            var data = _ref5.data;
+          _this7.form.delete(_this7.endpoint + '/' + id).then(function (_ref6) {
+            var data = _ref6.data;
 
-            _this5.coordinators.splice(index, 1);
+            _this7.coordinators.splice(index, 1);
 
             toast({
               type: 'success',
@@ -47595,11 +47620,90 @@ var render = function() {
                   _c(
                     "tbody",
                     [
+                      _vm._l(_vm.data, function(item, index) {
+                        return _c("tr", { key: item.id }, [
+                          _c("td", [_vm._v(_vm._s(index + 1) + ".")]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { nowrap: "" } }, [
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.edit(_vm.coordinators[index], index)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                                " +
+                                    _vm._s(item.name) +
+                                    "\n                                            "
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { nowrap: "" } }, [
+                            _vm._v(_vm._s(item.phone))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { nowrap: "" } }, [
+                            _vm._v(_vm._s(item.role.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { nowrap: "" } }, [
+                            _vm._v(_vm._s(item.location))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "text-right",
+                              attrs: { nowrap: "" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-secondary mx-2",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.edit(_vm.coordinators[index], index)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "far fa-edit" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-secondary ml-2",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.destroy(index, item.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "far fa-trash-alt" })]
+                              )
+                            ]
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
                       !_vm.data.length
                         ? _c("row-empty", { attrs: { colspan: 6 } })
                         : _vm._e()
                     ],
-                    1
+                    2
                   )
                 ])
               ])
@@ -47640,270 +47744,12 @@ var render = function() {
                     [
                       _c("div", { staticClass: "p-3" }, [
                         _c("div", { staticClass: "row" }, [
-                          _vm.$root.env_level == "dpr"
-                            ? _c("div", { staticClass: "col-md" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _vm._m(2),
-                                    _vm._v(" "),
-                                    _c(
-                                      "select",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.form.city,
-                                            expression: "form.city"
-                                          }
-                                        ],
-                                        staticClass: "form-control",
-                                        class: {
-                                          "is-invalid": _vm.form.errors.has(
-                                            "city"
-                                          )
-                                        },
-                                        attrs: { name: "city", id: "tps" },
-                                        on: {
-                                          change: function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              _vm.form,
-                                              "city",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "option",
-                                          { attrs: { value: "", hidden: "" } },
-                                          [_vm._v("Pilih:")]
-                                        ),
-                                        _vm._v(" "),
-                                        _vm._l(_vm.locations.cities, function(
-                                          item
-                                        ) {
-                                          return _c(
-                                            "option",
-                                            {
-                                              key: item.id,
-                                              domProps: { value: item.id }
-                                            },
-                                            [_vm._v(_vm._s(item.name))]
-                                          )
-                                        })
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
-                                    _c("has-error", {
-                                      attrs: { form: _vm.form, field: "city" }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
                           _c("div", { staticClass: "col-md" }, [
                             _c(
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _vm._m(3),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.district,
-                                        expression: "form.district"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has(
-                                        "district"
-                                      )
-                                    },
-                                    attrs: {
-                                      disabled:
-                                        !_vm.form.city &&
-                                        _vm.$root.env_level == "dpr",
-                                      name: "district",
-                                      id: "tps"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "district",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "", hidden: "" } },
-                                      [_vm._v("Pilih:")]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.locations.districts, function(
-                                      item
-                                    ) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: item.id,
-                                          domProps: { value: item.id }
-                                        },
-                                        [_vm._v(_vm._s(item.name))]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "district" }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-md" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _vm._m(4),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.village,
-                                        expression: "form.village"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has(
-                                        "village"
-                                      )
-                                    },
-                                    attrs: {
-                                      disabled: !_vm.form.district,
-                                      name: "village",
-                                      id: "tps"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "village",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "", hidden: "" } },
-                                      [_vm._v("Pilih:")]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.locations.villages, function(
-                                      item
-                                    ) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: item.id,
-                                          domProps: { value: item.id }
-                                        },
-                                        [_vm._v(_vm._s(item.name))]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "village" }
-                                })
-                              ],
-                              1
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p-3" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("div", { staticClass: "col-md" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _vm._m(6),
+                                _vm._m(2),
                                 _vm._v(" "),
                                 _c(
                                   "select",
@@ -47976,7 +47822,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _vm._m(7),
+                                _vm._m(3),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -48023,7 +47869,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _vm._m(8),
+                                _vm._m(4),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -48073,7 +47919,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _vm._m(9),
+                                _vm._m(5),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -48120,7 +47966,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _vm._m(10),
+                                _vm._m(6),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -48220,6 +48066,315 @@ var render = function() {
                           ])
                         ])
                       ]),
+                      _vm._v(" "),
+                      _vm.form.role
+                        ? [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "p-3" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _vm.$root.env_level == "dpr"
+                                  ? _c("div", { staticClass: "col-md" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group" },
+                                        [
+                                          _vm._m(8),
+                                          _vm._v(" "),
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.city_id,
+                                                  expression: "form.city_id"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": _vm.form.errors.has(
+                                                  "city_id"
+                                                )
+                                              },
+                                              attrs: {
+                                                name: "city_id",
+                                                id: "tps"
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "city_id",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "",
+                                                    hidden: ""
+                                                  }
+                                                },
+                                                [_vm._v("Pilih:")]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(
+                                                _vm.locations.cities,
+                                                function(item) {
+                                                  return _c(
+                                                    "option",
+                                                    {
+                                                      key: item.id,
+                                                      domProps: {
+                                                        value: item.id
+                                                      }
+                                                    },
+                                                    [_vm._v(_vm._s(item.name))]
+                                                  )
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          _c("has-error", {
+                                            attrs: {
+                                              form: _vm.form,
+                                              field: "city_id"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.form.role == "district-co" ||
+                                _vm.form.role == "village-co"
+                                  ? _c("div", { staticClass: "col-md" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group" },
+                                        [
+                                          _vm._m(9),
+                                          _vm._v(" "),
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.district_id,
+                                                  expression: "form.district_id"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": _vm.form.errors.has(
+                                                  "district_id"
+                                                )
+                                              },
+                                              attrs: {
+                                                disabled:
+                                                  !_vm.form.city_id &&
+                                                  _vm.$root.env_level == "dpr",
+                                                name: "district_id",
+                                                id: "tps"
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "district_id",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "",
+                                                    hidden: ""
+                                                  }
+                                                },
+                                                [_vm._v("Pilih:")]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(
+                                                _vm.locations.districts,
+                                                function(item) {
+                                                  return _c(
+                                                    "option",
+                                                    {
+                                                      key: item.id,
+                                                      domProps: {
+                                                        value: item.id
+                                                      }
+                                                    },
+                                                    [_vm._v(_vm._s(item.name))]
+                                                  )
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          _c("has-error", {
+                                            attrs: {
+                                              form: _vm.form,
+                                              field: "district_id"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.form.role == "village-co"
+                                  ? _c("div", { staticClass: "col-md" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "form-group" },
+                                        [
+                                          _vm._m(10),
+                                          _vm._v(" "),
+                                          _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.village_id,
+                                                  expression: "form.village_id"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": _vm.form.errors.has(
+                                                  "village_id"
+                                                )
+                                              },
+                                              attrs: {
+                                                disabled: !_vm.form.district_id,
+                                                name: "village_id",
+                                                id: "tps"
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$selectedVal = Array.prototype.filter
+                                                    .call(
+                                                      $event.target.options,
+                                                      function(o) {
+                                                        return o.selected
+                                                      }
+                                                    )
+                                                    .map(function(o) {
+                                                      var val =
+                                                        "_value" in o
+                                                          ? o._value
+                                                          : o.value
+                                                      return val
+                                                    })
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "village_id",
+                                                    $event.target.multiple
+                                                      ? $$selectedVal
+                                                      : $$selectedVal[0]
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "option",
+                                                {
+                                                  attrs: {
+                                                    value: "",
+                                                    hidden: ""
+                                                  }
+                                                },
+                                                [_vm._v("Pilih:")]
+                                              ),
+                                              _vm._v(" "),
+                                              _vm._l(
+                                                _vm.locations.villages,
+                                                function(item) {
+                                                  return _c(
+                                                    "option",
+                                                    {
+                                                      key: item.id,
+                                                      domProps: {
+                                                        value: item.id
+                                                      }
+                                                    },
+                                                    [_vm._v(_vm._s(item.name))]
+                                                  )
+                                                }
+                                              )
+                                            ],
+                                            2
+                                          ),
+                                          _vm._v(" "),
+                                          _c("has-error", {
+                                            attrs: {
+                                              form: _vm.form,
+                                              field: "village_id"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ])
+                            ])
+                          ]
+                        : _vm._e(),
                       _vm._v(" "),
                       !_vm.editmode
                         ? [
@@ -48439,7 +48594,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { nowrap: "" } }, [_vm._v("No. HP")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tugas")]),
+        _c("th", { attrs: { nowrap: "" } }, [_vm._v("Tugas / Peran")]),
         _vm._v(" "),
         _c("th", [_vm._v("Wilayah")]),
         _vm._v(" "),
@@ -48452,7 +48607,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lokasi")]),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Data Kordinator")]),
       _vm._v(" "),
       _c(
         "button",
@@ -48466,41 +48621,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "city" } }, [
-      _vm._v("Kabupaten / Kota "),
-      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "district" } }, [
-      _vm._v("Kecamatan "),
-      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "village" } }, [
-      _vm._v("Desa / Kelurahan "),
-      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-light p-3" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Data Relawan")])
     ])
   },
   function() {
@@ -48545,6 +48665,41 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "phone" } }, [
       _vm._v("No. HP "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-light p-3" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lokasi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "city_id" } }, [
+      _vm._v("Kabupaten / Kota "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "district_id" } }, [
+      _vm._v("Kecamatan "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "village_id" } }, [
+      _vm._v("Desa / Kelurahan "),
       _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
     ])
   },

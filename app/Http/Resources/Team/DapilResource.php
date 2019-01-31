@@ -16,12 +16,13 @@ class DapilResource extends JsonResource
      */
     public function toArray($request)
     {
+        $location = $this->locationable ?? $this;
         return [
-            'id' => $this->locationable->id ?? $this->id,
-            'alias' => $this->locationable->alias ?? $this->alias,
-            'name' => $this->locationable->name ?? $this->name,
-            'parent' => $this->locationable->parent->name ?? $this->parent->name,
-            'tps' => VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id)->count(),
+            'id' => $location->id,
+            'alias' => $location->alias,
+            'name' => $location->name,
+            'parent' => $location->parent->name,
+            'tps' => VotingPlace::all()->where($location->alias, $location->id)->count(),
             'volunteers' => 0
         ];
     }

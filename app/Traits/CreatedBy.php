@@ -9,7 +9,7 @@ trait CreatedBy
     public static function bootCreatedBy()
     {
         static::saving(function ($model) {
-            $model->created_by = Auth::id();
+            // $model->created_by = auth('api')->user()->id;
         });
     }
 }
