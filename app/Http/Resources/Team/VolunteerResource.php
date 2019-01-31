@@ -22,7 +22,7 @@ class VolunteerResource extends JsonResource
             'locationable_id' => $this->locationable_id,
             'address' => $this->address,
             'phone' => $this->phone,
-            'information' => $this->information ?? '-',
+            'information' => $this->information,
         ];
     }
 }

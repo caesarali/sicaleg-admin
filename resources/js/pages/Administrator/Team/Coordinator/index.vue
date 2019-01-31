@@ -31,7 +31,8 @@
                                             <th>Nama</th>
                                             <th nowrap>No. HP</th>
                                             <th nowrap>Tugas / Peran</th>
-                                            <th>Wilayah</th>
+                                            <th class="text-center">Wilayah</th>
+                                            <th class="text-center">Kontribusi</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -45,7 +46,8 @@
                                             </td>
                                             <td nowrap>{{ item.phone }}</td>
                                             <td nowrap>{{ item.role.name }}</td>
-                                            <td nowrap>{{ item.location }}</td>
+                                            <td nowrap class="text-center">{{ item.location }}</td>
+                                            <td nowrap class="text-center">0 Suara</td>
                                             <td nowrap class="text-right">
                                                 <a href="#" @click.prevent="edit(coordinators[index], index)" class="text-secondary mx-2">
                                                     <i class="far fa-edit"></i>
@@ -55,7 +57,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <row-empty :colspan="6" v-if="!data.length"></row-empty>
+                                        <row-empty :colspan="7" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
                             </div>
@@ -184,7 +186,7 @@
                         <div class="modal-footer border-top-0 bg-light">
                             <button type="button" class="btn btn-secondary d-none d-sm-inline-block" data-dismiss="modal">Batal</button>
                             <button-default type="submit" :disabled="form.busy" class="btn-block-xs">
-                                <i class="fas fa-check mr-1"></i> Tambahkan
+                                <i class="fas fa-check mr-1"></i> <span v-html="editmode ? 'Simpan Perubahan' : 'Tambahkan'"></span>
                             </button-default>
                         </div>
                     </form>
@@ -304,7 +306,7 @@ export default {
         update() {
             this.form.patch(this.endpoint + '/' + this.form.id)
             .then(({ data }) => {
-                this.dpt.splice(this.form.index, 1, data.data);
+                this.coordinators.splice(this.form.index, 1, data.data);
                 this.modal('hide')
                 toast({type: 'success', text: data.message})
             })

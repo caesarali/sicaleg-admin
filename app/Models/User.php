@@ -16,6 +16,10 @@ class User extends Authenticatable
     protected $hidden = ['password', 'remember_token'];
     protected $dates = ['deleted_at'];
 
+    public function volunteer() {
+        return $this->hasOne(Volunteer::class);
+    }
+
     public function roles() {
         return $this->belongsToMany(Role::class);
     }
@@ -36,6 +40,13 @@ class User extends Authenticatable
             $role = Role::whereName($role)->first();
         }
         return $this->roles()->detach($role);
+    }
+
+    public function syncRole($role) {
+        if (is_string($role)) {
+            $role = Role::whereName($role)->first();
+        }
+        return $this->roles()->sync($role);
     }
 
     public function hasRole($roles) {

@@ -22,7 +22,7 @@ class CoordinatorRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
         $rules = [
             'name' => 'required|string|max:50',
@@ -30,23 +30,22 @@ class CoordinatorRequest extends FormRequest
             'nik' => 'required|numeric|digits:16',
             'phone' => 'required|numeric|digits_between:10,12',
             'information' => 'nullable|string',
-            'username' =>  'required|string|min:6|unique:users,username',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:6',
             'role' => 'required|string',
             'city_id' => 'required|integer',
-            ''
         ];
 
-        if ($request->role == 'district-co') {
-            $rules[] = ['district_id' => 'required|integer'];
+        if ($this->isMethod('POST')) {
+            $rules['username'] = 'required|string|min:6|unique:users,username';
+            $rules['email'] = 'required|string|email|max:255|unique:users,email';
+            $rules['password'] = 'required|string|min:6';
         }
 
-        if ($request->role == 'village-co') {
-            $rules[] = [
-                ['district_id' => 'required|integer'],
-                ['village_id' => 'required|integer']
-            ];
+        if (request()->role == 'district-co' || request()->role == 'village-co') {
+            $rules['district_id'] = 'required|integer';
+        }
+
+        if (request()->role == 'village-co') {
+            $rules['village_id'] = 'required|integer';
         }
 
         return $rules;

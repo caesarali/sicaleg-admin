@@ -3715,6 +3715,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3840,7 +3842,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.patch(this.endpoint + '/' + this.form.id).then(function (_ref5) {
         var data = _ref5.data;
 
-        _this6.dpt.splice(_this6.form.index, 1, data.data);
+        _this6.coordinators.splice(_this6.form.index, 1, data.data);
 
         _this6.modal('hide');
 
@@ -47654,9 +47656,23 @@ var render = function() {
                             _vm._v(_vm._s(item.role.name))
                           ]),
                           _vm._v(" "),
-                          _c("td", { attrs: { nowrap: "" } }, [
-                            _vm._v(_vm._s(item.location))
-                          ]),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "text-center",
+                              attrs: { nowrap: "" }
+                            },
+                            [_vm._v(_vm._s(item.location))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass: "text-center",
+                              attrs: { nowrap: "" }
+                            },
+                            [_vm._v("0 Suara")]
+                          ),
                           _vm._v(" "),
                           _c(
                             "td",
@@ -47700,7 +47716,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       !_vm.data.length
-                        ? _c("row-empty", { attrs: { colspan: 6 } })
+                        ? _c("row-empty", { attrs: { colspan: 7 } })
                         : _vm._e()
                     ],
                     2
@@ -48566,7 +48582,14 @@ var render = function() {
                         },
                         [
                           _c("i", { staticClass: "fas fa-check mr-1" }),
-                          _vm._v(" Tambahkan\n                        ")
+                          _vm._v(" "),
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.editmode ? "Simpan Perubahan" : "Tambahkan"
+                              )
+                            }
+                          })
                         ]
                       )
                     ],
@@ -48596,7 +48619,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { nowrap: "" } }, [_vm._v("Tugas / Peran")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Wilayah")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Wilayah")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Kontribusi")]),
         _vm._v(" "),
         _c("th")
       ])
