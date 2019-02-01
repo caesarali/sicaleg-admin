@@ -29,6 +29,7 @@
         "animate.css": "^3.7.0",
         "sweetalert2": "^7.33.1",
         "vform": "^1.0.0",
+        "vue-lazyload": "^1.2.6",
         "vue-router": "^3.0.2",
         "vue-spinner": "^1.0.3"
     }

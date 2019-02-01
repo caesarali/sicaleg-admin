@@ -28,7 +28,7 @@ class DptResource extends JsonResource
             'addr_street' => $this->addr_street,
             'addr_rt' => $this->addr_rt,
             'addr_rw' => $this->addr_rw,
-            'tps' => $this->locationable->name
+            'tps' => $this->tps->name
         ];
     }
 }

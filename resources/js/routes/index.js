@@ -17,13 +17,15 @@ import Team from "../pages/Administrator/Team";
 import Coordinator from "../pages/Administrator/Team/Coordinator";
 import Volunteer from "../pages/Administrator/Team/Volunteer";
 
+import C1 from "../pages/Administrator/Election/C1";
+
 // Error Page Components
 import PageNotFound from "../pages/Errors/404";
 
 const router = new Router({
     mode: 'history',
     linkActiveClass: "active",
-    linkExactActiveClass: "active",
+    linkExactActiveClass: "exactActive",
     scrollBehavior (to, from) {
         return { x: 0, y: 0 }
     },
@@ -55,6 +57,7 @@ const router = new Router({
                         { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
                     ]
                 },
+                { path: 'election/c1', name: 'admin.election.c1', component: C1 },
             ]
         },
 

@@ -13,7 +13,7 @@
                                     <i class="fas fa-pencil-alt mr-1 text-secondary"></i> Edit Profil
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#" @click.prevent="showPhoto">
                                     <i class="fas fa-images mr-1 text-secondary"></i> Lihat Foto
                                 </a>
                                 <a class="dropdown-item" href="#">
@@ -95,6 +95,8 @@
                 </div>
             </div>
         </div>
+
+        <light-box ref="lightbox"></light-box>
     </section>
 </template>
 
@@ -116,7 +118,11 @@ export default {
                 number: '',
                 locationable_id: '',
                 locationable_name: '',
-            })
+            }),
+            image: {
+                src: '/images/sipileg-logo.png',
+                caption: 'asdasda'
+            }
         }
     },
 
@@ -147,6 +153,10 @@ export default {
         },
         modal(action) {
             $('#candidateModal').modal(action)
+        },
+
+        showPhoto() {
+            this.$refs.lightbox.open(this.image)
         }
     },
 

@@ -15,7 +15,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                Data Recap Relawan
+                                Lokasi Relawan
                             </div>
                             <div class="card-body p-0 table-responsive">
                                 <table class="table table-hover nowrap">
@@ -23,8 +23,8 @@
                                         <tr>
                                             <th class="text-center" width="1%">#</th>
                                             <th>Lokasi</th>
-                                            <th nowrap class="text-center">Jumlah TPS</th>
-                                            <th nowrap class="text-center">Jumlah Relawan</th>
+                                            <th nowrap class="text-center" width="10%">Jumlah TPS</th>
+                                            <th nowrap class="text-center" width="10%">Jumlah Relawan</th>
                                         </tr>
                                     </thead>
                                     <tbody>

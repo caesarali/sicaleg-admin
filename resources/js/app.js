@@ -3,6 +3,12 @@ window.Vue = require('vue');
 
 import router from './routes';
 
+// LazyLoad
+import VueLazyLoad from 'vue-lazyload';
+Vue.use(VueLazyLoad, {
+    preLoad: 1.3,
+});
+
 // Confirm Message
 import Confirm from './commons/Confirm';
 Vue.prototype.$confirm = new Confirm;
@@ -48,6 +54,7 @@ Vue.component('row-empty', require('./components/ui/tables/RowEmpty.vue').defaul
 Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue').default);
 Vue.component('app-loader', require('./components/ui/AppLoader.vue').default);
 Vue.component('search-box', require('./components/ui/SearchBox.vue').default);
+Vue.component('light-box', require('./components/ui/LightBox.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 // Filters

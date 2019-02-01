@@ -38,7 +38,7 @@ class VotingPlace extends Model
     }
 
     public function voters() {
-        return $this->morphMany(Voter::class, 'locationable');
+        return $this->hasMany(Voter::class, 'tps_id');
     }
 
     public function volunteers() {

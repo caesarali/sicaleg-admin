@@ -112,7 +112,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">PEMILU</li>
+                        <li class="nav-header">PILEG</li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'admin.election.c1' }" class="nav-link close-sidebar">
+                                <i class="fas fa-database nav-icon"></i>
+                                <p class="ml-1">C1</p>
+                            </router-link>
+                        </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
                                 <i class="fas fa-database nav-icon"></i>

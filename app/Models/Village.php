@@ -33,4 +33,8 @@ class Village extends Model
     public function childs() {
         return $this->tps();
     }
+
+    public function voters() {
+        return $this->morphMany(Voter::class, 'locationable');
+    }
 }

@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('API')->group(function () {
+Route::namespace('API')->middleware('auth:api')->group(function () {
     Route::apiResource('party', 'PartyController')->only(['index', 'update']);
 
     Route::namespace('Candidate')->prefix('candidate')->group(function () {
@@ -35,6 +35,7 @@ Route::namespace('API')->group(function () {
     Route::namespace('Election')->group(function () {
         Route::apiResource('dpt', 'DptController')->only(['index', 'store', 'update', 'destroy']);
         Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
+        Route::get('election/c1', 'C1Controller@index');
     });
 
     Route::namespace('Team')->group(function () {

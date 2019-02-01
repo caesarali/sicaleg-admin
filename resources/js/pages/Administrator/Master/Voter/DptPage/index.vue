@@ -72,17 +72,14 @@
         <div class="modal fade" id="dptModal" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title">{{ editmode ? 'Edit Data' : 'Data Baru' }}</h5>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Data Pemilih</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form @submit.prevent="editmode ? update() : store()">
                         <div class="modal-body p-0">
-                            <div class="p-3 bg-light border-0">
-                                <h5 class="modal-title">Informasi Diri</h5>
-                            </div>
                             <div class="p-3">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -264,7 +261,7 @@ export default {
             form: new Form({
                 index: '',
                 id: '',
-                locationable_id: this.$route.params.tps_id,
+                tps_id: this.$route.params.tps_id,
                 kk: '',
                 nik: '',
                 name: '',

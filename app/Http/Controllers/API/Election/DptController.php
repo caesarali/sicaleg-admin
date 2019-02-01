@@ -36,7 +36,7 @@ class DptController extends Controller
             return TpsResource::collection($tps);
         }
         if ($request->has('tps_id')) {
-            $tps = Voter::where('locationable_id', $request->tps_id)->orderBy('name', 'asc')->paginate(50);
+            $tps = Voter::where('tps_id', $request->tps_id)->orderBy('name', 'asc')->paginate(50);
             return DptResource::collection($tps)->additional([
                 'ref_disabilities' => Disability::all()
             ]);
@@ -48,7 +48,7 @@ class DptController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'locationable_id' => 'required|integer',
+            'tps_id' => 'required|integer',
             'kk' => 'required|numeric|digits:16',
             'nik' => 'required|numeric|digits:16|unique:voters',
             'name' => 'required|string|max:50',
@@ -62,7 +62,11 @@ class DptController extends Controller
             'disability_id' => 'nullable|integer',
             'information' => 'nullable|string'
         ]);
-        $request->request->add(['locationable_type' => VotingPlace::class]);
+        $tps = VotingPlace::findOrFail($request->tps_id);
+        $request->merge([
+            'locationable_type' => Village::class,
+            'locationable_id' => $tps->village_id
+        ]);
 
         $dpt = Voter::create($request->all());
 

@@ -20,7 +20,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                Data Relawan
+                                Daftar Relawan
                             </div>
                             <div class="card-body p-0 table-responsive">
                                 <table class="table table-hover nowrap">
@@ -29,9 +29,9 @@
                                             <th width="1%">#</th>
                                             <th>TPS</th>
                                             <th>Nama</th>
-                                            <th>NIK</th>
-                                            <th>Alamat</th>
                                             <th nowrap>No. HP</th>
+                                            <th>Alamat</th>
+                                            <th nowrap class="text-center">Kontribusi</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -44,9 +44,9 @@
                                                     {{ item.name }}
                                                 </a>
                                             </td>
-                                            <td nowrap>{{ item.nik }}</td>
-                                            <td nowrap>{{ item.address }}</td>
                                             <td nowrap>{{ item.phone }}</td>
+                                            <td nowrap>{{ item.address }}</td>
+                                            <td nowrap class="text-center">0 Suara</td>
                                             <td nowrap class="text-right">
                                                 <a href="#" @click.prevent="edit(volunteers[index], index)" class="text-secondary mx-2">
                                                     <i class="far fa-edit"></i>
