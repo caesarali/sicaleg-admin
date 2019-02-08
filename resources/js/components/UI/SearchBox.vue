@@ -4,7 +4,8 @@
             <input type="search" v-model="$root.keywords" placeholder="Search" aria-label="Search" class="form-control form-control-navbar border-0">
             <div class="input-group-append">
                 <div class="input-group-text bg-white border-0">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search" v-if="!$root.isSearching"></i>
+                    <moon-loader :loading="$root.isSearching" color="#007bff" size="20px"></moon-loader>
                 </div>
             </div>
         </div>

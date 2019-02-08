@@ -27,6 +27,7 @@
     "dependencies": {
         "admin-lte": "^3.0.0-alpha.2",
         "animate.css": "^3.7.0",
+        "laravel-vue-pagination": "^2.2.0",
         "sweetalert2": "^7.33.1",
         "vform": "^1.0.0",
         "vue-lazyload": "^1.2.6",

@@ -8,6 +8,10 @@ class Province extends Model
 {
     protected $fillable = ['name'];
 
+    public function getNameAttribute($value) {
+        return $this->attributes['name'] = ucwords(strtolower($value));
+    }
+
     public function cities() {
         return $this->hasMany(City::class);
     }

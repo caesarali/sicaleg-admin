@@ -38,7 +38,7 @@ class VotingPlace extends Model
     }
 
     public function voters() {
-        return $this->hasMany(Voter::class, 'tps_id');
+        return $this->hasMany(Voter::class, 'voting_place_id');
     }
 
     public function volunteers() {

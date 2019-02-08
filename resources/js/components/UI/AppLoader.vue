@@ -1,21 +1,17 @@
 <template>
     <div class="text-center">
-        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+        <pulse-loader v-if="loader == 'pulse'" :loading="loading" :color="color"></pulse-loader>
+        <moon-loader v-if="loader == 'moon'" :loading="loading" :color="color" class="d-inline-block" ></moon-loader>
     </div>
 </template>
 
 <script>
 export default {
-    // components: {
-    //     'ring-loader': require('vue-spinner/src/RingLoader.vue'),
-    //     'pulse-loader': require('vue-spinner/src/PulseLoader.vue')
-    // },
-    props: ['loading'],
-    data() {
-        return {
-            color: '#d2d6de',
-            size: '10px'
-        }
-    }
+    props: {
+        loading: { type: Boolean, required: false, default: false },
+        loader: { type: String, required: false, default: 'pulse' },
+        color: { type: String, required: false, default: '#007bff' },
+        // size: { type: String, required: false,  default: '40px' }
+    },
 }
 </script>

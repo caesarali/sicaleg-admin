@@ -3,6 +3,9 @@
         <div class="container-fluid mt-3">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-10 col-md-8">
+                    <!-- <div class="form-group">
+                        <input type="file" name="file" id="file" ref="file">
+                    </div> -->
                     <div class="card card-widget widget-user d-flex">
                         <div class="dropdown position-absolute" style="right: 15px; top: 10px">
                             <a href="#" class="text-secondary" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -112,6 +115,9 @@ export default {
             endpoint: '/candidate/profile/',
             profile: [],
             provinces: [],
+            upload: new Upload({
+                file: ''
+            }),
             form: new Form({
                 id: '',
                 name: '',

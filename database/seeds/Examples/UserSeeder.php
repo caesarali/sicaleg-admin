@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
+use App\Models\User;
+use App\Models\Role;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -12,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $user = User::create([
             'name' => 'Caesar Ali L.',
             'username' => 'caesarali',
             'email' => 'caesaralilamondo@gmail.com',
@@ -21,5 +24,6 @@ class UserSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        $user->assignRole('superadmin');
     }
 }

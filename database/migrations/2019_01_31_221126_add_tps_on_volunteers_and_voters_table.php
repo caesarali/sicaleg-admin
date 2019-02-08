@@ -13,15 +13,15 @@ class AddTpsOnVolunteersAndVotersTable extends Migration
      */
     public function up()
     {
-        Schema::table('volunteers', function (Blueprint $table) {
-            $table->integer('tps_id')->unsigned()->nullable()->after('locationable_id');
-            $table->foreign('tps_id')->references('id')->on('voting_places')->onDelete('cascade');
-        });
+        // Schema::table('volunteers', function (Blueprint $table) {
+        //     $table->integer('voting_place_id')->unsigned()->nullable()->after('locationable_id');
+        //     $table->foreign('voting_place_id')->references('id')->on('voting_places')->onDelete('cascade');
+        // });
 
-        Schema::table('voters', function (Blueprint $table) {
-            $table->integer('tps_id')->unsigned()->nullable()->after('locationable_id');
-            $table->foreign('tps_id')->references('id')->on('voting_places')->onDelete('cascade');
-        });
+        // Schema::table('voters', function (Blueprint $table) {
+        //     $table->integer('voting_place_id')->unsigned()->nullable()->after('locationable_id');
+        //     $table->foreign('voting_place_id')->references('id')->on('voting_places')->onDelete('cascade');
+        // });
     }
 
     /**

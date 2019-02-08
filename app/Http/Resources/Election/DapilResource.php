@@ -20,7 +20,7 @@ class DapilResource extends JsonResource
     {
         $tps = VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id);
         $tps_id = $tps->pluck('id');
-        $voters = Voter::whereIn('tps_id', $tps_id)->get();
+        $voters = Voter::whereIn('voting_place_id', $tps_id)->get();
         return [
             'id' => $this->locationable->id ?? $this->id,
             'alias' => $this->locationable->alias ?? $this->alias,

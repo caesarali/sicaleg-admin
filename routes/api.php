@@ -33,6 +33,7 @@ Route::namespace('API')->middleware('auth:api')->group(function () {
     });
 
     Route::namespace('Election')->group(function () {
+        Route::post('dpt/import', 'DptController@import');
         Route::apiResource('dpt', 'DptController')->only(['index', 'store', 'update', 'destroy']);
         Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
         Route::get('election/c1', 'C1Controller@index');

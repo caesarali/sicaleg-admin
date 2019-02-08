@@ -25,6 +25,51 @@
                         <div class="card">
                             <div class="card-header">
                                 Daftar Pemilih Tetap
+                                <!-- <div class="row d-none d-md-flex">
+                                    <div class="col-md">
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Provinsi</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext"><span class="d-none d-sm-inline">: </span>{{ meta.provinsi }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Kab. / Kota</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext"><span class="d-none d-sm-inline">: </span>{{ meta.kabupaten }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Kecamatan</label>
+                                            <div class="col-sm-9">
+                                                <p class="form-control-plaintext"><span class="d-none d-sm-inline">: </span>{{ meta.kecamatan }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md">
+                                        <div class="row d-flex justify-content-end">
+                                            <label class="col-sm-4 col-form-label">Desa/Keluarahan</label>
+                                            <div class="col-sm-4">
+                                                <p class="form-control-plaintext"><span class="d-none d-sm-inline">: </span>{{ meta.kelurahan }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end">
+                                            <label class="col-sm-4 col-form-label">TPS</label>
+                                            <div class="col-sm-4">
+                                                <p class="form-control-plaintext"><span class="d-none d-sm-inline">: </span>{{ meta.tps }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end">
+                                            <label class="col-sm-4 col-form-label">Jumlah Pemilih</label>
+                                            <div class="col-sm-4">
+                                                <p class="form-control-plaintext">
+                                                    <span class="d-none d-sm-inline">: </span>
+                                                    <badge-default>{{ meta.total }}</badge-default>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                             <div class="card-body p-0 table-responsive">
                                 <table class="table table-hover nowrap">
@@ -41,7 +86,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(item, index) in data" :key="item.id">
-                                            <td>{{ index+1 }}.</td>
+                                            <td>{{ meta.from + index }}.</td>
                                             <td nowrap @click.prevent="show(dpt[index])" style="cursor: pointer" class="text-primary">{{ item.nik }}</td>
                                             <td nowrap>{{ item.name }}</td>
                                             <td nowrap>{{ item.birth_place }}, {{ item.birth_date }}</td>
@@ -64,6 +109,7 @@
                                 </table>
                             </div>
                         </div>
+                        <simple-pagination v-if="data.length" :meta="meta" :links="links" :page-on-change="init"></simple-pagination>
                     </div>
                 </div>
             </div>
@@ -190,7 +236,7 @@
         </div>
 
         <div class="modal fade" id="showModal" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header border-bottom-0">
                         <h5 class="modal-title">Profil Pemilih</h5>
@@ -202,35 +248,37 @@
                         <table class="table table-hover nowrap">
                             <tbody>
                                 <tr>
-                                    <td class="d-flex">No. KK <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">No. KK <span class="ml-auto">:</span></th>
                                     <td>{{ form.kk }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">No. Induk <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">No. Induk <span class="ml-auto">:</span></th>
                                     <td>{{ form.nik }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Nama <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">Nama <span class="ml-auto">:</span></th>
                                     <td>{{ form.name }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Tempat, Tgl. Lahir <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">Tempat, Tgl. Lahir <span class="ml-auto">:</span></th>
                                     <td>{{ form.birth_place }}, {{ form.birth_date }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Status Pernikahan <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">Status Pernikahan <span class="ml-auto">:</span></th>
                                     <td>{{ form.marital_status | marital }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Jenis Kelamin <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">Jenis Kelamin <span class="ml-auto">:</span></th>
                                     <td>{{ form.gender | gender }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Alamat <span class="ml-auto">:</span></td>
-                                    <td>{{ form.addr_street}}, RT-{{ form.addr_rt }}, RW-{{ form.addr_rw }}</td>
+                                    <th class="d-flex">Alamat <span class="ml-auto">:</span></th>
+                                    <td>{{ form.addr_street}}, <br>
+                                        RT-{{ form.addr_rt }}, RW-{{ form.addr_rw }}.
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="d-flex">Disabilitas <span class="ml-auto">:</span></td>
+                                    <th class="d-flex">Disabilitas <span class="ml-auto">:</span></th>
                                     <td>{{ form.disability_id ? form.disability_id : '-' }}</td>
                                 </tr>
                             </tbody>
@@ -243,15 +291,15 @@
             </div>
         </div>
 
-        <modal-import ref="importModal"></modal-import>
+        <dpt-import ref="importModal"></dpt-import>
     </div>
 </template>
 
 <script>
-import ModalImport from "./ModalImport";
+import DptImport from "./DptImport";
 export default {
     components: {
-        ModalImport
+        DptImport
     },
     data() {
         return {
@@ -275,6 +323,15 @@ export default {
                 disability_id: '',
                 information: ''
             }),
+            meta: {},
+            links: {}
+        }
+    },
+
+    watch: {
+        '$root.keywords'(value) {
+            this.$root.isSearching = true
+            this.search()
         }
     },
 
@@ -291,20 +348,38 @@ export default {
                     gender: item.gender
                 }
             })
-        }
+        },
+        pagination() {
+            return {
+                data: this.data,
+                links: this.links,
+                meta: this.meta
+            }
+        },
     },
 
     methods: {
-        init() {
+        init(page = 1) {
             let params = this.$route.params
             axios.get('/dpt', {
-                params: params
+                params: {
+                    tps_id: params.tps_id,
+                    page: page,
+                    keyword: this.$root.keywords
+                }
             })
             .then(({ data }) => {
                 this.dpt = data.data
+                this.meta = data.meta
+                this.links = data.links
                 this.disabilities = data.ref_disabilities
             })
+            .catch()
+            .then(() => this.$root.isSearching = false)
         },
+        search: _.debounce(function() {
+            this.init()
+        }, 300),
         create() {
             this.editmode = false
             this.form.reset()
@@ -359,7 +434,7 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
         this.init()
     }
 }

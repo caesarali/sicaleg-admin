@@ -1,17 +1,17 @@
 <template>
-    <tps-page v-if="query.village_id"></tps-page>
-    <dpt-page v-else-if="params.tps_id"></dpt-page>
-    <dapil-page v-else></dapil-page>
+    <tps-list v-if="query.village_id"></tps-list>
+    <dpt-list v-else-if="params.tps_id"></dpt-list>
+    <dapil-list v-else></dapil-list>
 </template>
 
 
 <script>
-import DapilPage from "./DapilPage";
-import TpsPage from "./TpsPage";
-import DptPage from "./DptPage";
+import DapilList from "./DapilList";
+import TpsList from "./TpsList";
+import DptList from "./DptList";
 export default {
     components: {
-        DapilPage, TpsPage, DptPage
+        DapilList, TpsList, DptList
     },
 
     computed: {
