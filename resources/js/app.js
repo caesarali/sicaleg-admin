@@ -66,6 +66,7 @@ Vue.component('moon-loader', require('vue-spinner/src/MoonLoader.vue').default);
 Vue.component('app-loader', require('./components/ui/AppLoader.vue').default);
 Vue.component('search-box', require('./components/ui/SearchBox.vue').default);
 Vue.component('light-box', require('./components/ui/LightBox.vue').default);
+Vue.component('content-wrapper', require('./components/ui/ContentWrapper.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 // Filters

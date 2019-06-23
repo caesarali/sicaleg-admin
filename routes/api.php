@@ -54,4 +54,8 @@ Route::namespace('API')->middleware('auth:api')->group(function () {
     Route::get('/district/{id}', function ($id) {
         return Indonesia::findDistrict($id, ['villages']);
     });
+
+    Route::namespace('Auth')->group(function () {
+        Route::apiResource('users', 'UserController')->except(['show']);
+    });
 });

@@ -125,6 +125,15 @@
                                 <p class="ml-1">DPT</p>
                             </router-link>
                         </li>
+
+
+                        <li class="nav-header">SYSTEM</li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'users' }" class="nav-link close-sidebar">
+                                <i class="fas fa-database nav-icon"></i>
+                                <p class="ml-1">AKUN</p>
+                            </router-link>
+                        </li>
                     </ul>
                 </nav>
             </div>

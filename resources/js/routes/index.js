@@ -19,6 +19,8 @@ import Volunteer from "../pages/Administrator/Team/Volunteer";
 
 import C1 from "../pages/Administrator/Election/C1";
 
+import User from "../pages/Administrator/Auth/User";
+
 // Error Page Components
 import PageNotFound from "../pages/Errors/404";
 
@@ -58,6 +60,7 @@ const router = new Router({
                     ]
                 },
                 { path: 'election/c1', name: 'admin.election.c1', component: C1 },
+                { path: 'users', name: 'users', component: User }
             ]
         },
 
