@@ -16,7 +16,7 @@ class CreateVotingPlacesTable extends Migration
         Schema::create('voting_places', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->bigInteger('village_id')->unsigned();
+            $table->char('village_id', 10);
             $table->timestamps();
             $table->softDeletes();
 

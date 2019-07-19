@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="locationable_id" class="col-md-3 col-form-label text-md-right">Lokasi Dapil</label>
+                                <label for="locationable_id" class="col-md-3 col-form-label text-md-right">Lokasi</label>
                                 <div class="col-md-9">
                                     <select name="locationable_id" id="locationable_id" class="form-control{{ $errors->has('locationable_id') ? ' is-invalid' : '' }}" required>
                                         <option value="" hidden>Pilih:</option>
@@ -50,12 +50,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="locationable_name" class="col-md-3 col-form-label text-md-right">Nama Dapil</label>
+                                <label for="dapil" class="col-md-3 col-form-label text-md-right">Dapil</label>
                                 <div class="col-md-9">
-                                    <input id="locationable_name" type="text" class="form-control{{ $errors->has('locationable_name') ? ' is-invalid' : '' }}" name="locationable_name" value="{{ old('locationable_name') }}" required placeholder="Contoh: Dapil 1 Sulsel.">
-                                    @if ($errors->has('locationable_name'))
+                                    <input id="dapil" type="text" class="form-control{{ $errors->has('dapil') ? ' is-invalid' : '' }}" name="dapil" value="{{ old('dapil') }}" required placeholder="Contoh: Dapil 1 Sulsel.">
+                                    @if ($errors->has('dapil'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('locationable_name') }}</strong>
+                                            <strong>{{ $errors->first('dapil') }}</strong>
                                         </span>
                                     @endif
                                 </div>

@@ -27,15 +27,12 @@ class CreateVotersTable extends Migration
             $table->string('addr_rw')->nullable();
             $table->string('information')->nullable();
             $table->integer('disability_id')->unsigned()->nullable();
-            $table->integer('marital_status_id')->unsigned()->nullable();
-            $table->nullableMorphs('locationable');
             $table->integer('voting_place_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('voting_place_id')->references('id')->on('voting_places')->onDelete('cascade');
             $table->foreign('disability_id')->references('id')->on('ref_disabilities')->onDelete('cascade');
-            $table->foreign('marital_status_id')->references('id')->on('ref_marital_statuses')->onDelete('cascade');
         });
     }
 

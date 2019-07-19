@@ -18,7 +18,6 @@ class CreatePartiesTable extends Migration
             $table->string('name');
             $table->string('fullname')->nullable();
             $table->integer('number')->unsigned()->nullable();
-            $table->string('logo')->nullable();
             $table->integer('picture_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Candidate;
-use App\Models\CandidateLevel;
-use App\Models\CandidateArea;
-use App\Models\Group;
 use App\Models\Province;
-use App\Models\Cities;
+use App\Models\City;
 
 class SetupController extends Controller
 {
@@ -19,12 +16,12 @@ class SetupController extends Controller
             'name' => 'required|string|max:100',
             'number' => 'required|integer',
             'locationable_id' => 'required|integer',
-            'locationable_name' => 'required|string|max:100',
+            'dapil' => 'required|string|max:100',
         ]);
 
-        $level = CandidateLevel::where('code', env('CALEG_LEVEL', 'drp'))->first();
+        $level = env('CALEG_LEVEL');
 
-        if (env('CALEG_LEVEL') == 'dpr') {
+        if ($level == 'dpr') {
             $locationable_type = Province::class;
         } else {
             $locationable_type = City::class;
@@ -33,10 +30,10 @@ class SetupController extends Controller
         $candidate = Candidate::create([
             'name' => $request->name,
             'number' => $request->number,
-            'level_id' => $level->id,
+            'level' => $level,
+            'dapil' => $request->dapil,
             'locationable_type' => $locationable_type,
-            'locationable_id' => $request->locationable_id,
-            'locationable_name' => $request->locationable_name
+            'locationable_id' => $request->locationable_id
         ]);
 
         return redirect()->back();

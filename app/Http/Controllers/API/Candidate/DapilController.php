@@ -17,6 +17,7 @@ class DapilController extends Controller
         $candidate = Candidate::all()->first();
         $locations = $candidate->locationable->childs;
         return DapilResource::collection($dapil)->additional([
+            'name' => $candidate->dapil,
             'locations' => $locations
         ]);
     }
@@ -31,7 +32,7 @@ class DapilController extends Controller
         ], $message);
 
         $candidate = Candidate::all()->first();
-        $locationable_type = $candidate->level->locationable_child;
+        $locationable_type = $candidate->candidateLevel->locationable_child;
 
         $dapil = CandidateArea::create([
             'locationable_type' => $locationable_type,

@@ -17,7 +17,7 @@ class CreatePicturesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->string('path');
+            $table->string('path')->nullable();
             $table->string('thumb')->nullable();
             $table->integer('uploaded_by')->unsigned()->nullable();
             $table->timestamps();

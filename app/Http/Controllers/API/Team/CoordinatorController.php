@@ -42,12 +42,21 @@ class CoordinatorController extends Controller
     {
         switch ($request->role) {
             case 'city-co':
+                $request->validate([
+                    'city_id' => 'required|integer'
+                ]);
                 $locationable = City::find($request->city_id);
                 break;
             case 'district-co':
+                $request->validate([
+                    'district_id' => 'required|integer'
+                ]);
                 $locationable = District::find($request->district_id);
                 break;
             case 'village-co':
+                $request->validate([
+                    'village_id' => 'required|integer'
+                ]);
                 $locationable = Village::find($request->village_id);
                 break;
         }
@@ -74,12 +83,21 @@ class CoordinatorController extends Controller
     {
         switch ($request->role) {
             case 'city-co':
+                $request->validate([
+                    'city_id' => 'required|integer'
+                ]);
                 $locationable = City::find($request->city_id);
                 break;
             case 'district-co':
+                $request->validate([
+                    'district_id' => 'required|integer'
+                ]);
                 $locationable = District::find($request->district_id);
                 break;
             case 'village-co':
+                $request->validate([
+                    'village_id' => 'required|integer'
+                ]);
                 $locationable = Village::find($request->village_id);
                 break;
         }

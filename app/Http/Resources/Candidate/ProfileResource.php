@@ -20,11 +20,9 @@ class ProfileResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'number' => $this->number,
-            'locationable_id' => $this->locationable_id,
-            'locationable_name' => $this->locationable_name,
-            'level' => $this->level->name,
-            'dapil_name' => $this->locationable_name,
-            'dapil_locations' => DapilResource::collection(CandidateArea::all())
+            'level' => $this->level,
+            'dapil' => $this->dapil,
+            'locationable_id' => $this->locationable_id
         ];
     }
 }

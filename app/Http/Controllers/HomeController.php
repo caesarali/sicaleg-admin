@@ -36,11 +36,11 @@ class HomeController extends Controller
             return view('preinstall.caleg', compact('locations'));
         }
 
-        $areas = CandidateArea::all();
-        if ($areas->count() <= 0) {
-            $locations = $candidate->locationable->childs;
-            return view('preinstall.dapil', compact('locations'));
-        }
+        // $areas = CandidateArea::all();
+        // if ($areas->count() <= 0) {
+        //     $locations = $candidate->locationable->childs;
+        //     return view('preinstall.dapil', compact('locations'));
+        // }
 
         return redirect()->route('home');
     }

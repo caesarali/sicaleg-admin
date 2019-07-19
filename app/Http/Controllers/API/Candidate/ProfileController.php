@@ -8,13 +8,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Candidate\ProfileResource as CandidateResource;
 
 use App\Models\Candidate;
+use Indonesia;
 
 class ProfileController extends Controller
 {
     public function index()
     {
         $candidate = Candidate::all()->first();
-        return new CandidateResource($candidate);
+        $locations = $candidate->level == 'dpr' ? Indonesia::allProvinces() : Indonesia::allCities();
+        return (new CandidateResource($candidate))->additional([
+            'locations' => $locations
+        ]);
     }
 
     public function update(Request $request, Candidate $profile)

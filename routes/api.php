@@ -2,33 +2,14 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::get('/pretty-json', function () {
-    $jsonString = file_get_contents(asset('dpt/listDps.json'));
-    $data = json_decode($jsonString, true);
-    dd($data);
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/login', 'API\Auth\LoginController@login');
 
 Route::namespace('API')->middleware('auth:api')->group(function () {
-    Route::apiResource('party', 'PartyController')->only(['index', 'update']);
+    Route::get('/dashboard', 'DashboardController@index');
 
+    Route::apiResource('party', 'Candidate\PartyController')->only(['index', 'update']);
     Route::namespace('Candidate')->prefix('candidate')->group(function () {
         Route::apiResource('profile', 'ProfileController')->only(['index', 'update']);
-        Route::apiResource('locations', 'LocationsController')->only(['index', 'store', 'destroy']);
         Route::apiResource('dapil', 'DapilController')->only(['index', 'store', 'destroy']);
     });
 
@@ -36,7 +17,7 @@ Route::namespace('API')->middleware('auth:api')->group(function () {
         Route::post('dpt/import', 'DptController@import');
         Route::apiResource('dpt', 'DptController')->only(['index', 'store', 'update', 'destroy']);
         Route::apiResource('tps', 'TpsController')->only(['store', 'destroy']);
-        Route::get('election/c1', 'C1Controller@index');
+        Route::apiResource('supporters', 'SupporterController');
     });
 
     Route::namespace('Team')->group(function () {

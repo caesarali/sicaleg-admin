@@ -31,21 +31,12 @@ class CoordinatorRequest extends FormRequest
             'phone' => 'required|numeric|digits_between:10,12',
             'information' => 'nullable|string',
             'role' => 'required|string',
-            'city_id' => 'required|integer',
         ];
 
         if ($this->isMethod('POST')) {
             $rules['username'] = 'required|string|min:6|unique:users,username';
             $rules['email'] = 'required|string|email|max:255|unique:users,email';
             $rules['password'] = 'required|string|min:6';
-        }
-
-        if (request()->role == 'district-co' || request()->role == 'village-co') {
-            $rules['district_id'] = 'required|integer';
-        }
-
-        if (request()->role == 'village-co') {
-            $rules['village_id'] = 'required|integer';
         }
 
         return $rules;

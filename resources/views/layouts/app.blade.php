@@ -11,7 +11,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
@@ -61,40 +61,40 @@
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        @role(['superadmin', 'admin'])
-                            <li class="nav-item">
-                                <router-link :to="{ name: 'admin.dashboard' }" class="nav-link close-sidebar">
-                                    <i class="fas fa-tachometer-alt nav-icon"></i>
-                                    <p class="ml-1">Dashboard</p>
-                                </router-link>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <router-link :to="{ name: 'home' }" class="nav-link close-sidebar">
-                                    <i class="fas fa-home nav-icon"></i>
-                                    <p>Home</p>
-                                </router-link>
-                            </li>
-                        @endrole
-                        <li class="nav-header">CALEG</li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'admin.candidate' }" class="nav-link close-sidebar">
-                                <i class="fas fa-user-tie nav-icon"></i>
-                                <p class="ml-1">PROFIL</p>
+                            <router-link :to="{ name: 'dashboard' }" class="nav-link close-sidebar">
+                                <i class="fas fa-home nav-icon"></i>
+                                <p class="ml-1">Dashboard</p>
+                            </router-link>
+                        </li>
+
+                        <li class="nav-header">Monitoring</li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'supporters' }" class="nav-link close-sidebar">
+                                <i class="far fa-smile nav-icon"></i>
+                                <p class="ml-1">Dukungan</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'admin.party' }" class="nav-link close-sidebar">
-                                <i class="far fa-flag nav-icon"></i>
-                                <p class="ml-1">PARTAI</p>
+                            <a href="#" class="nav-link close-sidebar">
+                                <i class="far fa-user-circle nav-icon"></i>
+                                <p class="ml-1">Relawan</p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-header">CALEG</li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'candidate' }" class="nav-link close-sidebar">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p class="ml-1">PROFIL</p>
                             </router-link>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p class="ml-1">
-                                    TEAM
-                                    <i class="fa fa-angle-left right"></i>
+                                    TEAM <i class="fa fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -112,22 +112,15 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">PILEG</li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'admin.election.c1' }" class="nav-link close-sidebar">
-                                <i class="fas fa-database nav-icon"></i>
-                                <p class="ml-1">C1</p>
-                            </router-link>
-                        </li>
+
+
+                        <li class="nav-header">SYSTEM</li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'master.dpt' }" class="nav-link close-sidebar">
                                 <i class="fas fa-database nav-icon"></i>
                                 <p class="ml-1">DPT</p>
                             </router-link>
                         </li>
-
-
-                        <li class="nav-header">SYSTEM</li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'users' }" class="nav-link close-sidebar">
                                 <i class="fas fa-database nav-icon"></i>
@@ -145,13 +138,13 @@
 
         <aside class="control-sidebar control-sidebar-light">
             <div class="p-3">
-                <img src="{{ asset('images/user.png') }}" class="img-fluid mx-auto d-block rounded-circle" style="width: 75px">
+                <img src="{{ asset('images/profile.png') }}" class="img-fluid mx-auto d-block rounded-circle" style="width: 75px">
                 <div class="pt-2 text-center">
                     <h5 class="mb-0">{{ Auth::user()->name }}</h5>
                     <p>{{ Auth::user()->roles[0]->display_name ?? '-' }}</p>
                 </div>
                 <hr class="mt-0">
-                <button class="btn btn-outline-danger btn-block" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <button class="btn btn-outline-secondary btn-block" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt mr-1"></i> Logout
                 </button>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

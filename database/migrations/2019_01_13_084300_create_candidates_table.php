@@ -17,15 +17,13 @@ class CreateCandidatesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('number')->unsigned()->nullable();
-            $table->integer('level_id')->unsigned()->nullable();
+            $table->enum('level', ['dpr', 'dprd'])->nullable();
+            $table->string('dapil')->nullable();
             $table->nullableMorphs('locationable');
-            $table->string('locationable_name')->nullable();
             $table->integer('picture_id')->unsigned()->nullable();
-            $table->string('photo')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('level_id')->references('id')->on('candidate_levels')->onDelete('cascade');
             $table->foreign('picture_id')->references('id')->on('pictures')->onDelete('cascade');
         });
     }

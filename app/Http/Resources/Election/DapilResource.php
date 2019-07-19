@@ -10,12 +10,6 @@ use App\Models\Voter;
 
 class DapilResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function toArray($request)
     {
         $tps = VotingPlace::all()->where($this->locationable->alias ?? $this->alias, $this->locationable->id ?? $this->id);

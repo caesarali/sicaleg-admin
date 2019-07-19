@@ -18,10 +18,6 @@ class Volunteer extends Model
         return $this->morphTo();
     }
 
-    public function location() {
-        return $this->hasOne(VolunteerLocation::class, 'volunteer_id');
-    }
-
     public function user() {
         return $this->belongsTo(User::class)->withTrashed();
     }

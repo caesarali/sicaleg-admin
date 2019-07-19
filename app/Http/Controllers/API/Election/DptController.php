@@ -117,12 +117,15 @@ class DptController extends Controller
     public function import(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx|max:2048'
+            'file' => 'required|file|mimes:xls,xlsx|max:2048'
         ]);
 
-        $file = $request->file('file');
-        $import = Excel::import(new VotersImport, $file);
+        $import = new VotersImport($request->tps_id);
+        Excel::import($import, $request->file);
 
-        return response()->json(['message' => 'Data Pemilih Berhasil Diimport'], 200);
+        $success = count($import->success);
+        $errors = count($import->errors);
+
+        return response()->json(['message' => 'DPT Berhasil Diimport'], 200);
     }
 }

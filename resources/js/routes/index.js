@@ -1,28 +1,26 @@
 import Vue from 'vue'
 import Router  from 'vue-router'
+import store from '../stores'
 
+// Auth Page Components
+import Login from '../pages/Auth/Login';
 // Page Components
-import Web from '../pages/Web';
-import Home from '../pages/Web/Home';
-
-import Administrator from "../pages/Administrator";
-import Dashboard from "../pages/Administrator/Dashboard";
-import Candidate from "../pages/Administrator/Candidate";
-import Party from "../pages/Administrator/Party";
-
-import Master from "../pages/Administrator/Master";
-import Voter from "../pages/Administrator/Master/Voter";
-
-import Team from "../pages/Administrator/Team";
-import Coordinator from "../pages/Administrator/Team/Coordinator";
-import Volunteer from "../pages/Administrator/Team/Volunteer";
-
-import C1 from "../pages/Administrator/Election/C1";
-
-import User from "../pages/Administrator/Auth/User";
-
+import Dashboard from "../pages/Dashboard";
+import Candidate from "../pages/Candidate";
+import Team from "../pages/Team";
+import Supporter from "../pages/Supporter";
+import Supporters from "../pages/Supporter/Supporters";
+import SupportersByGender from "../pages/Supporter/SupportersByGender";
+import SupportersByAge from "../pages/Supporter/SupportersByAge";
+import Coordinator from "../pages/Team/Coordinator";
+import Volunteer from "../pages/Team/Volunteer";
+import Master from "../pages/Master";
+import Voter from "../pages/Master/Voter";
+import User from "../pages/Auth/User";
 // Error Page Components
 import PageNotFound from "../pages/Errors/404";
+
+Vue.use(Router)
 
 const router = new Router({
     mode: 'history',
@@ -32,57 +30,65 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-        // User Page
-        { path: '/', component: Web,
+        // Login Page
+        { path: '/login', name: 'login', component: Login },
+
+        { path: '/home', redirect: 'dashboard'},
+        { path: '/dashboard', name: 'dashboard', component: Dashboard },
+        { path: '/candidate', name: 'candidate', component: Candidate },
+        { path: '/supporters', component: Supporter,
             children: [
-                { path: '', redirect: 'home' },
-                { path: 'home', name: 'home', component: Home },
+                { path: '', name: 'supporters', component: Supporters },
+                { path: 'by-gender', name: 'supporters.byGender', component: SupportersByGender },
+                { path: 'by-age', name: 'supporters.byAge', component: SupportersByAge }
             ]
         },
 
-        // Administrator Page
-        { path: '/admin', component: Administrator,
+        { path: '/team', component: Team,
             children: [
-                { path: '', redirect: 'dashboard'},
-                { path: 'dashboard', name: 'admin.dashboard', component: Dashboard },
-                { path: 'candidate', name: 'admin.candidate', component: Candidate },
-                { path: 'party', name: 'admin.party', component: Party },
-                { path: 'master', component: Master,
-                    children: [
-                        { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
-                        { path: 'dpt/list/:tps_id/import', name: 'master.dpt.import', component: Voter },
-                    ]
-                },
-                { path: 'team', component: Team,
-                    children: [
-                        { path: 'coordinators', name: 'team.coordinators', component: Coordinator },
-                        { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
-                    ]
-                },
-                { path: 'election/c1', name: 'admin.election.c1', component: C1 },
-                { path: 'users', name: 'users', component: User }
+                { path: 'coordinators', name: 'team.coordinators', component: Coordinator },
+                { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
             ]
         },
 
+        { path: '/master', component: Master,
+            children: [
+                { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
+                { path: 'dpt/list/:tps_id/import', name: 'master.dpt.import', component: Voter },
+            ]
+        },
 
-        // Error Page
+        { path: '/users', name: 'users', component: User },
+
+        // // Error Page
         { path: '*', name: '404', component: PageNotFound },
     ]
 })
 
-router.beforeResolve((to, from, next) => {
-    if ($('.modal').hasClass('show')) {
-        $('.modal').modal('hide');
-    } else {
-        $('body').removeClass('control-sidebar-slide-open');
-        if (to.name) {
-            // router.app.$Progress.start()
-        }
-        next()
-    }
-})
+//Navigation Guards
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         let auth = store.getters.isAuth
+//         if (!auth) {
+//             next({ name: 'login' })
+//         } else {
+//             next()
+//         }
+//     } else {
+//         next()
+//     }
+// })
 
-
-Vue.use(Router)
+// router.beforeResolve((to, from, next) => {
+//     if ($('.modal').hasClass('show')) {
+//         $('.modal').modal('hide');
+//     } else {
+//         $('body').removeClass('control-sidebar-slide-open');
+//         if (to.name) {
+//             // router.app.$Progress.start()
+//         }
+//         next()
+//     }
+// })
 
 export default router;
