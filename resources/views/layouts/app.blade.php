@@ -76,10 +76,10 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link close-sidebar">
+                            <router-link :to="{ name: 'monitoring' }" class="nav-link close-sidebar">
                                 <i class="far fa-user-circle nav-icon"></i>
                                 <p class="ml-1">Relawan</p>
-                            </a>
+                            </router-link>
                         </li>
 
 

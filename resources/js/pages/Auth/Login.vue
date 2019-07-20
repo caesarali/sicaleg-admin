@@ -61,7 +61,7 @@ export default {
         //KITA MELAKUKAN PENGECEKAN JIKA SUDAH LOGIN DIMANA VALUE isAuth BERNILAI TRUE
         if (this.isAuth) {
             //MAKA DI-DIRECT KE ROUTE DENGAN NAME home
-            this.$router.push({ name: 'home' })
+            this.$router.push({ path: '/' })
         }
     },
     computed: {
@@ -81,7 +81,7 @@ export default {
                 if (this.isAuth) {
                     this.CLEAR_ERRORS()
                     //MAKA AKAN DI-DIRECT KE ROUTE DENGAN NAME home
-                    this.$router.push({ name: 'home' })
+                    this.$router.push({ path: '/' })
                 }
             })
         }

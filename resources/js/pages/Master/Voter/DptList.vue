@@ -109,7 +109,21 @@
                                 </table>
                             </div>
                         </div>
-                        <simple-pagination v-if="data.length" :meta="meta" :links="links" :page-on-change="init"></simple-pagination>
+                        <paginate v-if="data.length"
+                            v-model="meta.current_page"
+                            :page-count="meta.last_page"
+                            :click-handler="init"
+                            :prev-text="'Prev'"
+                            :next-text="'Next'"
+                            :container-class="'pagination justify-content-center'"
+                            :page-class="'page-item'"
+                            :page-link-class="'page-link'"
+                            :prev-class="'page-item'"
+                            :prev-link-class="'page-link'"
+                            :next-class="'page-item'"
+                            :next-link-class="'page-link'"
+                        >
+                        </paginate>
                     </div>
                 </div>
             </div>

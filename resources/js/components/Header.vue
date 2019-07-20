@@ -2,7 +2,7 @@
     <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" v-if="!back_button">
+                <a class="nav-link" data-widget="pushmenu" href="#" v-if="!$root.back_button">
                     <i class="fas fa-bars"></i>
                 </a>
                 <a class="nav-link" href="#" v-on:click="$router.go(-1)" v-else>
@@ -24,3 +24,13 @@
         </ul>
     </nav>
 </template>
+
+<script>
+// export default {
+//     props: {
+//         backButton: {
+//             default: false
+//         }
+//     }
+// }
+</script>

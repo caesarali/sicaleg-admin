@@ -18,20 +18,30 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <router-link :to="{ name: 'admin.dashboard' }" class="nav-link close-sidebar">
-                            <i class="fas fa-tachometer-alt nav-icon"></i>
+                        <router-link :to="{ name: 'dashboard' }" class="nav-link close-sidebar">
+                            <i class="fas fa-home nav-icon"></i>
                             <p class="ml-1">Dashboard</p>
                         </router-link>
                     </li>
+
+                    <li class="nav-header">Monitoring</li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'home' }" class="nav-link close-sidebar">
-                            <i class="fas fa-home nav-icon"></i>
-                            <p>Home</p>
+                        <router-link :to="{ name: 'supporters' }" class="nav-link close-sidebar">
+                            <i class="far fa-smile nav-icon"></i>
+                            <p class="ml-1">Dukungan</p>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link :to="{ name: 'monitoring' }" class="nav-link close-sidebar">
+                            <i class="far fa-user-circle nav-icon"></i>
+                            <p class="ml-1">Kinerja Relawan</p>
+                        </router-link>
+                    </li>
+
+
                     <li class="nav-header">CALEG</li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'admin.candidate' }" class="nav-link close-sidebar">
+                        <router-link :to="{ name: 'candidate' }" class="nav-link close-sidebar">
                             <i class="fas fa-user-tie nav-icon"></i>
                             <p class="ml-1">PROFIL</p>
                         </router-link>
@@ -40,8 +50,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p class="ml-1">
-                                TEAM
-                                <i class="fa fa-angle-left right"></i>
+                                TEAM <i class="fa fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">

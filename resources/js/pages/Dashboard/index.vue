@@ -115,9 +115,9 @@
                             </ul>
                         </div>
                         <div class="card-footer text-center">
-                            <a href="javascript:void(0)" class="text-uppercase">
+                            <router-link :to="{ name: 'monitoring' }" class="text-uppercase">
                                 <i class="fas fa-angle-double-right mr-1"></i> Monitoring
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                 </div>

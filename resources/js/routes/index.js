@@ -14,6 +14,7 @@ import SupportersByGender from "../pages/Supporter/SupportersByGender";
 import SupportersByAge from "../pages/Supporter/SupportersByAge";
 import Coordinator from "../pages/Team/Coordinator";
 import Volunteer from "../pages/Team/Volunteer";
+import Monitoring from "../pages/Team/Monitoring";
 import Master from "../pages/Master";
 import Voter from "../pages/Master/Voter";
 import User from "../pages/Auth/User";
@@ -30,65 +31,60 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-        // Login Page
         { path: '/login', name: 'login', component: Login },
-
-        { path: '/home', redirect: 'dashboard'},
-        { path: '/dashboard', name: 'dashboard', component: Dashboard },
-        { path: '/candidate', name: 'candidate', component: Candidate },
-        { path: '/supporters', component: Supporter,
+        { path: '/', redirect: 'dashboard'},
+        { path: '/dashboard', alias: '/home', name: 'dashboard', component: Dashboard, meta: { requiresAuth: true }},
+        { path: '/candidate', name: 'candidate', component: Candidate, meta: { requiresAuth: true } },
+        { path: '/monitoring/volunteers', name: 'monitoring', component: Monitoring, meta: { requiresAuth: true } },
+        { path: '/monitoring/supporters', component: Supporter, meta: { requiresAuth: true },
             children: [
                 { path: '', name: 'supporters', component: Supporters },
                 { path: 'by-gender', name: 'supporters.byGender', component: SupportersByGender },
                 { path: 'by-age', name: 'supporters.byAge', component: SupportersByAge }
             ]
         },
-
-        { path: '/team', component: Team,
+        { path: '/team', component: Team, meta: { requiresAuth: true },
             children: [
                 { path: 'coordinators', name: 'team.coordinators', component: Coordinator },
                 { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
             ]
         },
-
-        { path: '/master', component: Master,
+        { path: '/master', component: Master, meta: { requiresAuth: true },
             children: [
                 { path: 'dpt/list/:tps_id?', name: 'master.dpt', component: Voter },
                 { path: 'dpt/list/:tps_id/import', name: 'master.dpt.import', component: Voter },
             ]
         },
-
-        { path: '/users', name: 'users', component: User },
-
-        // // Error Page
+        { path: '/users', name: 'users', component: User, meta: { requiresAuth: true } },
         { path: '*', name: '404', component: PageNotFound },
     ]
 })
 
-//Navigation Guards
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         let auth = store.getters.isAuth
-//         if (!auth) {
-//             next({ name: 'login' })
-//         } else {
-//             next()
-//         }
-//     } else {
-//         next()
-//     }
-// })
+// Navigation Guards
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        let auth = store.getters.isAuth
+        if (!auth) {
+            next({ name: 'login' })
+        } else {
+            next()
+        }
+    } else {
+        next()
+    }
+})
 
-// router.beforeResolve((to, from, next) => {
-//     if ($('.modal').hasClass('show')) {
-//         $('.modal').modal('hide');
-//     } else {
-//         $('body').removeClass('control-sidebar-slide-open');
-//         if (to.name) {
-//             // router.app.$Progress.start()
-//         }
-//         next()
-//     }
-// })
+router.beforeResolve((to, from, next) => {
+    router.app.keywords = ''
+    if ($('.modal').hasClass('show')) {
+        $('.modal').modal('hide');
+    } else {
+        if (to.name) {
+            router.app.isLoading = true;
+            router.app.back_button = false;
+        }
+        next()
+    }
+})
 
 export default router;

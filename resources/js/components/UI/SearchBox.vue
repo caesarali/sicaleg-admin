@@ -5,7 +5,7 @@
             <div class="input-group-append">
                 <div class="input-group-text bg-white border-0">
                     <i class="fa fa-search" v-if="!$root.isSearching"></i>
-                    <moon-loader :loading="$root.isSearching" color="#007bff" size="20px"></moon-loader>
+                    <i class="fas fa-spinner fa-spin text-secondary" v-else></i>
                 </div>
             </div>
         </div>
