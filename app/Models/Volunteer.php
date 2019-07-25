@@ -18,6 +18,14 @@ class Volunteer extends Model
         return $this->morphTo();
     }
 
+    public function tps() {
+        return $this->belongsTo(VotingPlace::class, 'voting_place_id');
+    }
+
+    public function supporters() {
+        return $this->hasMany(Supporter::class, 'created_by', 'user_id');
+    }
+
     public function user() {
         return $this->belongsTo(User::class)->withTrashed();
     }

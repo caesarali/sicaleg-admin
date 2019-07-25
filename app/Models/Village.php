@@ -8,7 +8,11 @@ class Village extends Model
 {
     protected $fillable = ['name', 'district_id'];
 
-    protected $appends = ['alias'];
+    protected $appends = ['alias', 'detail'];
+
+    public function getDetailAttribute() {
+        return $this->name . ', ' . $this->district->name . ', ' . $this->district->city->name;
+    }
 
     public function getAliasAttribute() {
         return $this->attributes['alias'] = 'village_id';

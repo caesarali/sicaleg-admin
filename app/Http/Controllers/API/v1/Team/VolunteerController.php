@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Team;
+namespace App\Http\Controllers\API\v1\Team;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +17,8 @@ use App\Models\VotingPlace;
 use App\Models\Volunteer;
 use App\Models\VolunteerLocation;
 use App\Models\User;
+use App\Models\Supporter;
+use Illuminate\Support\Facades\DB;
 
 class VolunteerController extends Controller
 {
@@ -69,6 +71,15 @@ class VolunteerController extends Controller
         ]);
         $volunteer = Volunteer::create($request->all());
         return (new VolunteerResource($volunteer))->additional(['message' => 'Relawan ditambahkan.'], 200);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $volunteer = Volunteer::withCount('supporters')->where('id', $id)->orWhere('nik', $id)->firstOrFail();
+        $supporters = DB::table('supporters')->count();
+        $volunteer->load('locationable', 'user.roles');
+        $volunteer['contribution'] = $supporters * $volunteer->supporters_count / 100;
+        return response()->json($volunteer);
     }
 
     public function update(Request $request, Volunteer $volunteer)

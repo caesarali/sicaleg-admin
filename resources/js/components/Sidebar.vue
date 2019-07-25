@@ -1,7 +1,7 @@
 <template>
     <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
         <a href="#" class="brand-link">
-            <img src="/images/logo-m-90x90.png" alt="APP Logo" class="brand-image img-circle">
+            <img src="/images/vote.png" alt="APP Logo" class="brand-image">
             <span class="brand-text font-weight-bold">SICALEG</span>
         </a>
 

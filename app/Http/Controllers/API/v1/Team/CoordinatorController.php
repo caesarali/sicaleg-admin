@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Team;
+namespace App\Http\Controllers\API\v1\Team;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,13 +25,23 @@ class CoordinatorController extends Controller
 {
     public function index(Request $request)
     {
-        $coordinators = Volunteer::where('locationable_type', '!=', VotingPlace::class)->get();
-        $dapil = CandidateArea::all();
+        $page = $request->page;
+        $keyword = $request->keyword;
+        $coordinators = Volunteer::when($keyword, function($q, $keyword){
+            return $q->where('name', 'like', "%$keyword%")->orWhere('nik', 'like', "%$keyword%");
+        })
+        ->with(['user', 'locationable'])
+        ->withCount('supporters')
+        ->where('locationable_type', '!=', VotingPlace::class);
+        $coordinators = $page && $page > 0 ? $coordinators->paginate() : $coordinators->get();
+
         $roleList = ['district-co', 'village-co'];
         if (env('CALEG_LEVEL') == 'dpr') {
             $roleList[] = 'city-co';
         }
         $roles = Role::whereIn('name', $roleList)->get();
+        $dapil = CandidateArea::all();
+
         return CoordinatorResource::collection($coordinators)->additional([
             'dapil' => DapilResource::collection($dapil),
             'roles' => RoleResource::collection($roles)

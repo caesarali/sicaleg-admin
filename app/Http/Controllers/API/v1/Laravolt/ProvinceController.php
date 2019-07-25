@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Laravolt;
+namespace App\Http\Controllers\API\v1\Laravolt;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

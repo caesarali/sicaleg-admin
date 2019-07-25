@@ -16,6 +16,7 @@ class CreateSupportersTable extends Migration
         Schema::create('supporters', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('voter_id')->unsigned()->nullable();
+            $table->nullableMorphs('locationable');
             $table->integer('created_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();

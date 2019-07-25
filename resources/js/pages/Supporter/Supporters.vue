@@ -32,7 +32,7 @@
                                         <th>Kec.</th>
                                         <th>Kel./Desa</th>
                                         <th>Oleh</th>
-                                        <th>Waktu</th>
+                                        <th class="text-center">Waktu</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -42,17 +42,18 @@
                                         <td>{{ item.voter.nik }}</td>
                                         <td nowrap>{{ item.voter.name }}</td>
                                         <td nowrap>{{ item.voter.age }} Tahun</td>
-                                        <td class="text-uppercase">{{ item.voter.gender | gender }}</td>
-                                        <td nowrap>{{ item.voter.district.name }}</td>
-                                        <td nowrap>{{ item.voter.village.name }}</td>
+                                        <td nowrap class="text-uppercase">{{ item.voter.gender | gender }}</td>
+                                        <td nowrap>{{ item.voter.tps.village.district.name }}</td>
+                                        <td nowrap>{{ item.voter.tps.village.name }}</td>
                                         <td nowrap>{{ item.created_by.name }}</td>
-                                        <td nowrap>{{ item.created_at }}</td>
+                                        <td nowrap class="text-center">{{ item.created_at }}</td>
                                         <td nowrap class="text-right">
-                                            <a href="#" class="text-secondary ml-2">
+                                            <a href="#" @click.prevent="removeSupporter(index, item.id)" class="text-secondary ml-2">
                                                 <i class="far fa-trash-alt"></i>
                                             </a>
                                         </td>
                                     </tr>
+                                    <row-empty :colspan="10" v-if="!supporters.data.length"></row-empty>
                                 </tbody>
                             </table>
                         </div>
@@ -114,37 +115,23 @@ export default {
                 this.$root.isLoading = false
             })
         },
-        initChart() {
-            var ctx = document.getElementById('supporter-chart');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Makassar', 'Rappocini', 'Ujung Pandang'],
-                    datasets: [
-                        {
-                            label: 'Jumlah Pendukung',
-                            data: [12, 19, 3],
-                            backgroundColor: 'rgba(60,141,188,0.9)',
-                            borderColor: 'rgba(60,141,188,0.9)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+        removeSupporter(index, id) {
+            this.$confirm.delete().then((result) => {
+                if (result.value) {
+                    axios.delete('/supporters/' + id)
+                    .then(({ data }) => {
+                        this.supporters.data.splice(index, 1);
+                        toast({ type: 'success', title: data.message })
+                    })
+                    .catch(() => {
+                        toast({ type: 'error', title: 'Terjadi Kesalahan!' });
+                    });
                 }
-            });
+            })
         }
     },
     mounted() {
         this.getSupporters();
-        // this.initChart();
         this.$root.back_button = false;
     }
 }

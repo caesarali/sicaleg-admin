@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Voter;
+use App\Models\Village;
 
 class SupportersSeeder extends Seeder
 {
@@ -16,6 +17,8 @@ class SupportersSeeder extends Seeder
         $voters = $voters->map(function ($item) {
             return [
                 'voter_id' => $item->id,
+                'locationable_type' => Village::class,
+                'locationable_id' => $item->tps->village_id,
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_at' => now()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ use App\Models\Party;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $caleg = Candidate::all()->first();
         $partai = Party::all()->first();

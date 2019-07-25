@@ -1,13 +1,18 @@
 <template>
     <tr>
         <td :colspan="colspan" nowrap class="text-center text-secondary">
-            Data tidak ditemukan...
+            {{ message }}
         </td>
     </tr>
 </template>
 
 <script>
 export default {
-    props: ['colspan']
+    props: ['colspan'],
+    computed: {
+        message() {
+            return this.$root.isLoading ? 'Memuat data...' : 'Data tidak ditemukan...'
+        }
+    }
 }
 </script>

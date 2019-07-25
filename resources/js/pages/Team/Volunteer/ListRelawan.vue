@@ -7,7 +7,7 @@
                         <search-box></search-box>
                     </div>
                     <div class="col-auto">
-                        <button-default :click="create" class="app-shadow rounded-circle">
+                        <button-default :click="create" class="app-shadow">
                             <i class="fas fa-plus"></i>
                         </button-default>
                     </div>
@@ -146,7 +146,7 @@
                         <div class="modal-footer border-top-0 bg-light">
                             <button type="button" class="btn btn-secondary d-none d-sm-inline-block" data-dismiss="modal">Batal</button>
                             <button-default type="submit" :disabled="form.busy" class="btn-block-xs">
-                                <i class="fas fa-check mr-1"></i> Tambahkan
+                                <i class="fas fa-check mr-1"></i> Simpan
                             </button-default>
                         </div>
                     </form>

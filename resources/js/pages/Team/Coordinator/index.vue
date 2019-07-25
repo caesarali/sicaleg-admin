@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary" @click="create">
-                            <i class="fas fa-plus"></i> <span class="ml-1 d-none d-md-inline-block">Kordinator</span>
+                            <i class="fas fa-plus"></i>
                         </button>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                Daftar Relawan
+                                Daftar Kordinator
                             </div>
                             <div class="card-body p-0 table-responsive">
                                 <table class="table table-hover nowrap">
@@ -60,6 +60,9 @@
                                         <row-empty :colspan="7" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="overlay d-flex justify-content-center" v-if="$root.isLoading" style="align-items: center;">
+                                <i class="fas fa-2x fa-spinner fa-spin"></i>
                             </div>
                         </div>
                     </div>
@@ -276,6 +279,8 @@ export default {
                     this.locations.districts = data.dapil
                 }
             })
+            .catch()
+            .then(() => this.$root.isLoading = false)
         },
         modal(action) {
             $('#coordinatorModal').modal(action)

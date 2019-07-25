@@ -1,6 +1,7 @@
 <template>
     <div class="login-box">
         <div class="login-logo">
+            <img src="/images/vote.png" alt="Logo" class="img-fluid mx-auto d-block" style="width: 75px">
             <a href="#"><b>SI</b>CALEG</a>
         </div>
 

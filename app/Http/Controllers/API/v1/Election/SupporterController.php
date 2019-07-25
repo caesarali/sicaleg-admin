@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Election;
+namespace App\Http\Controllers\API\v1\Election;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,6 +8,7 @@ use App\Models\Supporter;
 use App\Http\Resources\Election\SupporterResource;
 use App\Models\VotingPlace;
 use App\Models\CandidateArea;
+use Illuminate\Support\Facades\DB;
 
 class SupporterController extends Controller
 {
@@ -24,7 +25,7 @@ class SupporterController extends Controller
             default:
                 $page = $request->page;
                 $keyword = $request->keyword;
-                $supporters = Supporter::with(['voter', 'createdBy'])->when($keyword, function($q, $keyword){
+                $supporters = Supporter::with(['voter.tps', 'createdBy'])->when($keyword, function($q, $keyword){
                     $q->whereHas('voter',function ($q) use ($keyword) {
                         return $q->where('name', 'like', "%{$keyword}%")->orWhere('nik', 'like', "%{$keyword}%");
                     });
@@ -34,42 +35,18 @@ class SupporterController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        $request->validate(['voter_id' => 'required|integer|unique:supporters,voter_id']);
-
-        $supporter = Supporter::create($request->all());
-        $supporter->load('voter');
-
-        return response()->json([
-            'message' => 'Pemilih ditambakan dalam daftar pendukung.',
-            'data' => $supporter
-        ], 200);
-    }
-
     public function destroy(Request $request, Supporter $supporter)
     {
         $user = $request->user();
         if ($user->hasRole(['superadmin', 'admin']) || $supporter->created_by == $user->id) {
             $supporter->forceDelete();
-            return response()->json(['message' => 'Pemilih dihilangkan dari daftar pendukung.'], 200);
+            return response()->json(['message' => 'Pemilih dihapus dari daftar pendukung.'], 200);
         }
         return response()->json(['message' => 'Kamu tidak tidak memiliki akses untuk ini.'], 401);
     }
 
     private function chartByAge($request)
     {
-        $supporters = Supporter::with(['voter'])->get();
-        $supporters = $supporters->map(function ($item) {
-            $voter = $item->voter;
-            $voter['village_id'] = $voter->village->id;
-            $voter['district_id'] = $voter->district->id;
-            $voter['city_id'] = $voter->city->id;
-            $voter['province_id'] = $voter->province->id;
-            return $voter;
-        });
-
-
         $dapil = CandidateArea::with(['locationable'])->get();
         $dapil = $dapil->map(function ($item) {
             return $item->locationable;
@@ -85,7 +62,10 @@ class SupporterController extends Controller
         }
 
         foreach ($locations as $item) {
-            $data = $supporters->where($item->alias, $item->id);
+            $data = Supporter::where('locationable_id', 'LIKE', "%$item->id%")->with(['voter'])->get();
+            $data = $data->map(function ($item) {
+                return $item->voter;
+            });
             $datasets['labels'][] = $item->name;
             $datasets['young'][] = $data->where('age', '<=', 20)->count();
             $datasets['mid'][] = $data->where('age', '>', 20)->where('age', '<=', 40)->count();
@@ -102,17 +82,6 @@ class SupporterController extends Controller
 
     private function chartByGender($request)
     {
-        $supporters = Supporter::with(['voter'])->get();
-        $supporters = $supporters->map(function ($item) {
-            $voter = $item->voter;
-            $voter['village_id'] = $voter->village->id;
-            $voter['district_id'] = $voter->district->id;
-            $voter['city_id'] = $voter->city->id;
-            $voter['province_id'] = $voter->province->id;
-            return $voter;
-        });
-
-
         $dapil = CandidateArea::with(['locationable'])->get();
         $dapil = $dapil->map(function ($item) {
             return $item->locationable;
@@ -128,7 +97,10 @@ class SupporterController extends Controller
         }
 
         foreach ($locations as $item) {
-            $data = $supporters->where($item->alias, $item->id);
+            $data = Supporter::where('locationable_id', 'LIKE', "%$item->id%")->with(['voter'])->get();
+            $data = $data->map(function ($item) {
+                return $item->voter;
+            });
             $datasets['labels'][] = $item->name;
             $datasets['male'][] = $data->where('gender', 'l')->count();
             $datasets['female'][] = $data->where('gender', 'p')->count();

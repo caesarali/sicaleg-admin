@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Election;
+namespace App\Http\Controllers\API\v1\Election;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

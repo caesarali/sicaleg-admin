@@ -13,9 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call('Laravolt\Indonesia\Seeds\DatabaseSeeder');
         $this->call(RolesSeeder::class);
-        $this->call(CandidateLevelsSeeder::class);
-        $this->call(DisabilitiesSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CandidateSeeder::class);
+        $this->call(CandidateLevelsSeeder::class);
+        $this->call(PartySeeder::class);
+        $this->call(DisabilitiesSeeder::class);
         $this->call(CandidateSeeder::class);
     }
 }

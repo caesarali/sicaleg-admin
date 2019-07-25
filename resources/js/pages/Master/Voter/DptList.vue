@@ -104,9 +104,12 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <row-empty :colspan="8" v-if="!data.length"></row-empty>
+                                        <row-empty :colspan="7" v-if="!data.length"></row-empty>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="overlay d-flex justify-content-center" v-if="$root.isLoading" style="align-items: center;">
+                                <i class="fas fa-2x fa-spinner fa-spin"></i>
                             </div>
                         </div>
                         <paginate v-if="data.length"
@@ -389,7 +392,10 @@ export default {
                 this.disabilities = data.ref_disabilities
             })
             .catch()
-            .then(() => this.$root.isSearching = false)
+            .then(() => {
+                this.$root.isSearching = false
+                this.$root.isLoading = false
+            })
         },
         search: _.debounce(function() {
             this.init()

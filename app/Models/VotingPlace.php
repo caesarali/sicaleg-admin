@@ -11,7 +11,11 @@ class VotingPlace extends Model
 
     protected $fillable = ['name', 'village_id'];
     protected $dates = ['deleted_at'];
-    protected $appends = ['alias', 'district_id', 'city_id', 'province_id'];
+    protected $appends = ['alias', 'detail', 'district_id', 'city_id', 'province_id'];
+
+    public function getDetailAttribute() {
+        return 'TPS ' . $this->village->name . ', ' . $this->village->district->name . ', ' . $this->village->district->city->name;
+    }
 
     public function getAliasAttribute() {
         return $this->attributes['alias'] = 'tps_id';

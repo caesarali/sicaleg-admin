@@ -8,12 +8,13 @@ import Login from '../pages/Auth/Login';
 import Dashboard from "../pages/Dashboard";
 import Candidate from "../pages/Candidate";
 import Team from "../pages/Team";
+import Coordinator from "../pages/Team/Coordinator";
+import Volunteer from "../pages/Team/Volunteer";
+import Profile from "../pages/Team/Profile";
 import Supporter from "../pages/Supporter";
 import Supporters from "../pages/Supporter/Supporters";
 import SupportersByGender from "../pages/Supporter/SupportersByGender";
 import SupportersByAge from "../pages/Supporter/SupportersByAge";
-import Coordinator from "../pages/Team/Coordinator";
-import Volunteer from "../pages/Team/Volunteer";
 import Monitoring from "../pages/Team/Monitoring";
 import Master from "../pages/Master";
 import Voter from "../pages/Master/Voter";
@@ -47,6 +48,7 @@ const router = new Router({
             children: [
                 { path: 'coordinators', name: 'team.coordinators', component: Coordinator },
                 { path: 'volunteers', name: 'team.volunteers', component: Volunteer },
+                { path: 'profile/:id?', name: 'team.profile', component: Profile }
             ]
         },
         { path: '/master', component: Master, meta: { requiresAuth: true },

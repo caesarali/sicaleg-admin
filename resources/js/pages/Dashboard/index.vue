@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-user-circle"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">TOTAL RELAWAN</span>
@@ -15,7 +15,7 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">TOTAL DPT</span>
@@ -28,7 +28,7 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">TOTAL DUKUNGAN</span>
@@ -39,7 +39,7 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">TARGET (20%)</span>
@@ -87,39 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Top Kordinator & Relawan</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <ul class="products-list product-list-in-card pl-2 pr-2">
-                                <li class="item" v-for="x in 3" :key="x">
-                                    <div class="product-info ml-1">
-                                        <a href="javascript:void(0)" class="product-title">
-                                            Relawan x
-                                            <span class="badge badge-info float-right">400 Suara</span>
-                                        </a>
-                                        <span class="product-description">
-                                            Kordinator Tingkat Kecamatan
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-footer text-center">
-                            <router-link :to="{ name: 'monitoring' }" class="text-uppercase">
-                                <i class="fas fa-angle-double-right mr-1"></i> Monitoring
-                            </router-link>
-                        </div>
-                    </div>
+                    <top-volunteers />
                 </div>
             </div>
         </div>
@@ -127,9 +95,10 @@
 </template>
 
 <script>
+import TopVolunteers from "./TopVolunteers"
 import SupportersChart from "./SupportersChart"
 export default {
-    components: { SupportersChart },
+    components: { SupportersChart, TopVolunteers },
     data() {
         return {
             relawan: 0,

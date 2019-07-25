@@ -8,7 +8,11 @@ class District extends Model
 {
     protected $fillable = ['name', 'city_id'];
 
-    protected $appends = ['alias'];
+    protected $appends = ['alias', 'detail'];
+
+    public function getDetailAttribute() {
+        return $this->name . ', ' . $this->city->name;
+    }
 
     public function getAliasAttribute() {
         return $this->attributes['alias'] = 'district_id';
