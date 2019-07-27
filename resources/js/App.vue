@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper">
-        <app-header v-if="isAuth" :back-button="$root.back_button" />
-        <app-sidebar v-if="isAuth" />
+        <app-header v-if="isAuth" />
+        <app-sidebar v-if="isAuth" :name="name" :role="role"/>
 
         <div :class="{ 'content-wrapper': isAuth }">
             <router-view></router-view>
         </div>
 
-        <control-sidebar v-if="isAuth" />
+        <control-sidebar v-if="isAuth" :name="name" :role="role" />
     </div>
 </template>
 <script>
@@ -18,7 +18,13 @@
     export default {
         computed: {
             ...mapState(['token']),
-            ...mapGetters(['isAuth'])
+            ...mapGetters(['isAuth']),
+            name() {
+                return localStorage.getItem('name')
+            },
+            role() {
+                return localStorage.getItem('role')
+            }
         },
         components: {
             'app-header': Header,

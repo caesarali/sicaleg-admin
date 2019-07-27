@@ -1,6 +1,6 @@
 <?php
 
-Route::post('/login', 'API\Auth\LoginController@login');
+Route::post('/login', 'API\v1\Auth\LoginController@login');
 Route::namespace('API\v1')->middleware('auth:api')->group(function () {
     Route::get('/dashboard', 'DashboardController@index');
 
@@ -40,11 +40,12 @@ Route::namespace('API\v1')->middleware('auth:api')->group(function () {
     });
 
     Route::namespace('Auth')->group(function () {
+        Route::post('/users/{user}/reset', 'UserController@reset');
         Route::apiResource('users', 'UserController')->except(['show']);
     });
 });
 
-Route::post('/v2/login', 'API\Auth\LoginController@login');
+Route::post('/v2/login', 'API\v2\LoginController@login');
 Route::namespace('API\v2')->prefix('v2')->middleware('auth:api')->group(function () {
     Route::get('/candidate', 'CandidateController@index');
     Route::get('/voter/{nik}', 'VoterController@search');

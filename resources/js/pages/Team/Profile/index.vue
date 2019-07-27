@@ -32,12 +32,11 @@
                             <tr>
                                 <td class="d-flex justify-content-between py-1 font-weight-bold">Kontribusi Dukungan <span>:</span></td>
                                 <td class="py-1">
-                                    <b>{{ profile.contribution }}%</b> dari total dukungan / {{ profile.supporters_count }} Orang</td>
+                                    <b>{{ profile.contribution }}%</b> dari total dukungan ({{ profile.supporters_count }} Suara)</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
                 <activities v-if="id" :id="id" />
             </div>
         </div>

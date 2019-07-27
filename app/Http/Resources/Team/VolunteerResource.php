@@ -23,6 +23,7 @@ class VolunteerResource extends JsonResource
             'address' => $this->address,
             'phone' => $this->phone,
             'information' => $this->information,
+            'contribution' => $this->supporters->count(),
         ];
     }
 }

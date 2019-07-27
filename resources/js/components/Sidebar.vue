@@ -2,7 +2,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x: hidden;">
         <a href="#" class="brand-link">
             <img src="/images/vote.png" alt="APP Logo" class="brand-image">
-            <span class="brand-text font-weight-bold">SICALEG</span>
+            <span class="brand-text"><b>SIM</b>CALEG</span>
         </a>
 
         <div class="sidebar">
@@ -11,7 +11,7 @@
                     <img src="/images/profile.png" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Caesar Ali L.</a>
+                    <a href="#" class="d-block">{{ name }}</a>
                 </div>
             </div>
 
@@ -88,3 +88,9 @@
         </div>
     </aside>
 </template>
+
+<script>
+export default {
+    props: ['name', 'role']
+}
+</script>

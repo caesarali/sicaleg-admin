@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle bg-gray" src="/images/sipileg-logo-mono.png" alt="Logo Partai">
+                    <img src="/images/flag.png" alt="Logo Partai">
                 </div>
                 <h3 class="widget-user-username mt-0">{{ party.name }}</h3>
                 <h5 class="widget-user-desc">{{ party.fullname }}</h5>

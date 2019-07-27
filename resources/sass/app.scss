@@ -35,6 +35,18 @@ body {
     overflow: auto !important;
 }
 
+.layout-navbar-fixed .wrapper .main-header {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 949;
+}
+
+.layout-navbar-fixed .wrapper .content-wrapper {
+    margin-top: calc(3.5rem + 1px);
+}
+
 @media only screen and (max-width: 700px){
     .btn-block-xs {
         display: block;

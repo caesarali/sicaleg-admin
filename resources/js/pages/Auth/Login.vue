@@ -2,12 +2,15 @@
     <div class="login-box">
         <div class="login-logo">
             <img src="/images/vote.png" alt="Logo" class="img-fluid mx-auto d-block" style="width: 75px">
-            <a href="#"><b>SI</b>CALEG</a>
         </div>
 
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Log in to start your session</p>
+                <h3 class="login-box-msg pb-0 font-weight-bold text-secondary">
+                    SIMCALEG
+                </h3>
+                <small class="d-block text-center text-secondary pb-3">Sistem Monitoring Kinerja Relawan Caleg</small>
+
                 <div class="alert alert-danger" v-if="errors.invalid">{{ errors.invalid }}</div>
                 <form @submit.prevent="postLogin">
                     <div class="form-group">
@@ -22,25 +25,14 @@
                             <strong>{{ errors.password[0] }}</strong>
                         </span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="data.remember">
-
-                                <label class="form-check-label" for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
-                        </div>
-
-                    </div>
+                    <button type="submit" class="btn btn-info btn-block" :disabled="isLoading">
+                        <i class="fas fa-sign-in-alt mr-1"></i> Log In
+                    </button>
                 </form>
             </div>
-
+            <div class="overlay d-flex justify-content-center" v-if="isLoading" style="align-items: center;">
+                <i class="fas fa-2x fa-spinner fa-spin"></i>
+            </div>
         </div>
     </div>
 </template>
@@ -57,31 +49,24 @@ export default {
             }
         }
     },
-    //SEBELUM COMPONENT DI-RENDER
     created() {
-        //KITA MELAKUKAN PENGECEKAN JIKA SUDAH LOGIN DIMANA VALUE isAuth BERNILAI TRUE
         if (this.isAuth) {
-            //MAKA DI-DIRECT KE ROUTE DENGAN NAME home
             this.$router.push({ path: '/' })
         }
     },
     computed: {
-        ...mapGetters(['isAuth']), //MENGAMBIL GETTERS isAuth DARI VUEX
+        ...mapGetters(['isAuth', 'isLoading']),
       	...mapState(['errors'])
     },
     methods: {
-        ...mapActions('auth', ['submit']), //MENGISIASI FUNGSI submit() DARI VUEX AGAR DAPAT DIGUNAKAN PADA COMPONENT TERKAIT. submit() BERASAL DARI ACTION PADA FOLDER STORES/auth.js
+        ...mapActions('auth', ['submit']),
         ...mapMutations(['CLEAR_ERRORS']),
 
-      	//KETIKA TOMBOL LOGIN DITEKAN, MAKA AKAN MEMINCU METHODS postLogin()
         postLogin() {
-            //DIMANA TOMBOL INI AKAN MENJALANKAN FUNGSI submit() DENGAN MENGIRIMKAN DATA YANG DIBUTUHKAN
+            this.CLEAR_ERRORS()
             this.submit(this.data).then(() => {
-                //KEMUDIAN DI CEK VALUE DARI isAuth
-                //APABILA BERNILAI TRUE
                 if (this.isAuth) {
                     this.CLEAR_ERRORS()
-                    //MAKA AKAN DI-DIRECT KE ROUTE DENGAN NAME home
                     this.$router.push({ path: '/' })
                 }
             })

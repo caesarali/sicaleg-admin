@@ -3,8 +3,8 @@
         <div class="p-3">
             <img src="/images/profile.png" class="img-fluid mx-auto d-block rounded-circle" style="width: 75px">
             <div class="pt-2 text-center">
-                <h5 class="mb-0">User</h5>
-                <p>Admin</p>
+                <h5 class="mb-0">{{ name }}</h5>
+                <p class="text-uppercase">{{ role }}</p>
             </div>
             <hr class="mt-0">
             <button class="btn btn-outline-secondary btn-block" @click="postLogout">
@@ -19,6 +19,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
+    props: ['name', 'role'],
     methods: {
         ...mapActions('auth', ['logout']),
         postLogout() {

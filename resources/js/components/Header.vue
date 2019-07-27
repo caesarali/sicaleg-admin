@@ -11,8 +11,8 @@
             </li>
         </ul>
 
-        <a href="#" class="brand-link mx-auto py-0 my-0 d-inline-block d-sm-none h3 font-weight-bold">
-            SICALEG
+        <a href="#" class="brand-link mr-auto py-0 my-0 d-inline-block d-sm-none h3 font-weight-bold">
+            SIMCALEG
         </a>
 
         <ul class="navbar-nav ml-sm-auto">
@@ -26,7 +26,7 @@
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
                         <div class="media">
-                            <img src="images/profile.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <img src="/images/profile.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Relawan X
@@ -49,13 +49,3 @@
         </ul>
     </nav>
 </template>
-
-<script>
-// export default {
-//     props: {
-//         backButton: {
-//             default: false
-//         }
-//     }
-// }
-</script>

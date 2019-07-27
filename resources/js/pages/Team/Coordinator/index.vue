@@ -47,7 +47,7 @@
                                             <td nowrap>{{ item.phone }}</td>
                                             <td nowrap>{{ item.role.name }}</td>
                                             <td nowrap class="text-center">{{ item.location }}</td>
-                                            <td nowrap class="text-center">0 Suara</td>
+                                            <td nowrap class="text-center">{{ item.contribution }} Suara</td>
                                             <td nowrap class="text-right">
                                                 <a href="#" @click.prevent="edit(coordinators[index], index)" class="text-secondary mx-2">
                                                     <i class="far fa-edit"></i>
@@ -241,7 +241,8 @@ export default {
                     role: this.roles.filter(role => {
                         return role.code == item.role
                     })[0],
-                    location: item.location
+                    location: item.location,
+                    contribution: item.contribution
                 }
             })
         }

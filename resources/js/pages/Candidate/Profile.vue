@@ -22,7 +22,7 @@
                 <h3 class="widget-user-username text-center">{{ profile.name }}</h3>
             </div>
             <div class="widget-user-image mt-3" style="top: 40px">
-                <img class="img-circle bg-gray" src="/images/sipileg-logo-mono.png" alt="User Avatar" width="100%" height="auto">
+                <img class="img-circle bg-gray" src="/images/man.png" alt="User Avatar" width="100%" height="auto">
             </div>
             <div class="card-footer">
                 <div class="description-block">

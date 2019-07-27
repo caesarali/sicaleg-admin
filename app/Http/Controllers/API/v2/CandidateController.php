@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
 use App\Models\CandidateArea;
+use Illuminate\Support\Facades\DB;
 
 class CandidateController extends Controller
 {
@@ -16,10 +17,12 @@ class CandidateController extends Controller
         $dapil = $dapil->map(function ($item) {
             return $item->locationable->name;
         });
+        $partai = DB::table('parties')->first();
 
         $response = [
             'caleg' => $caleg,
             'dapil' => $dapil,
+            'partai' => $partai
         ];
 
         return response()->json($response, 200);

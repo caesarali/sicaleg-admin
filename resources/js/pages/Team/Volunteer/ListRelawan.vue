@@ -46,7 +46,7 @@
                                             </td>
                                             <td nowrap>{{ item.phone }}</td>
                                             <td nowrap>{{ item.address }}</td>
-                                            <td nowrap class="text-center">0 Suara</td>
+                                            <td nowrap class="text-center">{{ item.contribution }} Suara</td>
                                             <td nowrap class="text-right">
                                                 <a href="#" @click.prevent="edit(volunteers[index], index)" class="text-secondary mx-2">
                                                     <i class="far fa-edit"></i>
@@ -193,7 +193,8 @@ export default {
                     nik: item.nik,
                     address: item.address,
                     phone: item.phone,
-                    information: item.information
+                    information: item.information,
+                    contribution: item.contribution
                 }
             })
             return data.filter(item => {
