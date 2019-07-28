@@ -2,8 +2,20 @@
 
 Route::post('/login', 'API\v1\Auth\LoginController@login');
 Route::namespace('API\v1')->middleware('auth:api')->group(function () {
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/user', function () {
+        return response()->json(auth('api')->user()->load('roles'));
+    });
+    Route::get('/notifications', function () {
+        $notifications = auth('api')->user()->unreadNotifications;
+        if (request()->markAs && request()->markAs == 'read') {
+            foreach ($notifications as $notification) {
+                $notification->markAsRead();
+            }
+        }
+        return response()->json($notifications);
+    });
 
+    Route::get('/dashboard', 'DashboardController@index');
     Route::apiResource('party', 'Candidate\PartyController')->only(['index', 'update']);
     Route::namespace('Candidate')->prefix('candidate')->group(function () {
         Route::apiResource('profile', 'ProfileController')->only(['index', 'update']);

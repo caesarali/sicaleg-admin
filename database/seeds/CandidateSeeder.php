@@ -14,8 +14,8 @@ class CandidateSeeder extends Seeder
     public function run()
     {
         DB::table('candidates')->insert([
-            'name' => 'Caesar Ali L.',
-            'number' => 2,
+            'name' => 'Nama Caleg',
+            'number' => 1,
             'level' => 'dprd',
             'dapil' => 'KOTA MAKASSAR 1',
             'locationable_type' => City::class,

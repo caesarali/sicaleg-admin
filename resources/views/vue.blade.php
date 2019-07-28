@@ -30,6 +30,27 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <script>
+        Notification.requestPermission().then(function(result) {
+            if (result === 'denied') {
+                console.log('Permission wasn\'t granted. Allow a retry.');
+                return;
+            }
+            if (result === 'default') {
+                console.log('The permission request was dismissed.');
+                return;
+            }
+            // Do something with the granted permission.
+        });
+
+        function spawnNotification(body, icon, title) {
+            var options = {
+                body: 'asdasd',
+                icon: 'asdasd'
+            };
+            var n = new Notification('asdasd', options);
+        }
+    </script> --}}
 </head>
 <body class="hold-transition layout-navbar-fixed">
     <div id="app" class="wrapper">

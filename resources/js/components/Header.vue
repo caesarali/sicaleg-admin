@@ -17,28 +17,34 @@
 
         <ul class="navbar-nav ml-sm-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
+                <a class="nav-link" data-toggle="dropdown" href="#" @click="$root.markAsReadNotification()">
                     <i class="far fa-bell"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
+                    <span class="badge badge-danger navbar-badge" v-if="notifications.length">{{ notifications.length }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Pemberitahuan</span>
+                    <span class="dropdown-item dropdown-header">
+                        <span v-text="notifications.length > 0 ? notifications.length : 'Tidak ada' "></span> Pemberitahuan
+                    </span>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <div style="cursor: pointer" class="dropdown-item" v-for="item in notifications.slice(0, 5)" :key="item.id">
                         <div class="media">
-                            <img src="/images/profile.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <!-- <img src="/images/profile.png" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
-                                    Relawan X
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                    {{ item.data.user_name }}
+                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                                 </h3>
                                 <p class="text-sm">Menambahkan 1 pendukung baru</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>
+                                    {{ item.created_at }}
+                                </p>
                             </div>
                         </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">Lihat Semua Pemberitahuan</a>
+                    </div>
+                    <div class="dropdown-divider" v-if="notifications.length"></div>
+                    <div style="cursor: pointer" class="dropdown-item dropdown-footer" v-if="notifications.length" @click="showAll">
+                        Lihat Semua
+                    </div>
                 </div>
             </li>
             <li class="nav-item">
@@ -49,3 +55,19 @@
         </ul>
     </nav>
 </template>
+
+<script>
+export default {
+    computed: {
+        notifications() {
+            return this.$root.notifications
+        }
+    },
+    methods: {
+        showAll() {
+            return this.$router.push({ name: 'monitoring' })
+        }
+    }
+}
+</script>
+

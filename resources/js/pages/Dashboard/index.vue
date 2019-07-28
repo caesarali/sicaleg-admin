@@ -42,8 +42,8 @@
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">TARGET (20%)</span>
-                            <span class="info-box-number">{{ target }}</span>
+                            <span class="info-box-text">TARGET ({{ target.percent }}%)</span>
+                            <span class="info-box-number">{{ target.total }}</span>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,10 @@ export default {
             relawan: 0,
             dpt: 0,
             dukungan: 0,
-            target: 0,
+            target: {
+                percent: 0,
+                total: 0
+            },
             caleg: []
         }
     },

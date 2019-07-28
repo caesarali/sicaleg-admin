@@ -21,14 +21,18 @@ class DashboardController extends Controller
         $totalDpt = Voter::count();
         $totalRelawan = Volunteer::count();
         $totalDukungan = Supporter::count();
-        $targetDukungan = $totalDpt * 20 / 100;
+        $targetInPercent = 20;
+        $targetDukungan = round($totalDpt * $targetInPercent / 100);
 
         $data = [
             'caleg' => $caleg,
             'relawan' => $totalRelawan,
             'dpt' => $totalDpt,
             'dukungan' => $totalDukungan,
-            'target' => $targetDukungan
+            'target' => [
+                'total' => $targetDukungan,
+                'percent' => $targetInPercent
+            ]
         ];
 
         return response()->json(['data' => $data]);

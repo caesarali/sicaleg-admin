@@ -12,8 +12,8 @@ class PartySeeder extends Seeder
     public function run()
     {
         DB::table('parties')->insert([
-            'name' => 'ABC',
-            'fullname' => 'Partai ABC',
+            'name' => 'ALC',
+            'fullname' => 'Anti Lembur-lembur Club',
             'number' => 1,
             'created_at' => now(),
             'updated_at' => now()

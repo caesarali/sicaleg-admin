@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\API\v2;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Election\SupporterResource;
+use App\Notifications\ContributionNotification;
 use App\Models\Supporter;
 use App\Models\Voter;
 use App\Models\Village;
+use App\Models\User;
 
 class SupporterController extends Controller
 {
@@ -27,13 +30,18 @@ class SupporterController extends Controller
     public function store(Request $request)
     {
         $nik = $request->nik;
-        $voter = Voter::where('nik', 'like', "%{$nik}%")->first();
+        $voter = Voter::where('nik', 'like', "%$nik%")->firstOrFail();
         if ($voter) {
+            $user = $request->user();
+            $users = User::whereHas('roles', function ($query) {
+                $query->where('name', 'superadmin')->orWhere('name', 'admin');
+            })->get();
             Supporter::create([
                 'voter_id' => $voter->id,
                 'locationable_type' => Village::class,
                 'locationable_id' => $voter->tps->village_id
             ]);
+            Notification::send($users, new ContributionNotification($voter, $user));
         }
         return response()->json(['data' => $voter, 'message' => 'Pemilih ditambahkan sebagai Pendukung.'], 200);
     }
@@ -53,7 +61,8 @@ class SupporterController extends Controller
         $supporters = Supporter::count();
         $voters = Voter::count();
         $data['supporters'] = $supporters;
-        $data['target'] = round($voters * 20 / 100);
+        $data['target']['total'] = round($voters * 20 / 100);
+        $data['target']['percent'] = 20;
         return response()->json($data);
     }
 }
