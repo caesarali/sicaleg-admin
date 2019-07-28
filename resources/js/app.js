@@ -99,11 +99,15 @@ const app = new Vue({
             })
         },
         spawnNotification(body, title) {
-            var options = {
-                body: body,
-                icon: '/icons/android-icon-192x192.png'
-            };
-            var n = new Notification(title, options);
+            Notification.requestPermission(function(result) {
+                if (result === 'granted') {
+                    var options = {
+                        body: body,
+                        icon: '/icons/android-icon-192x192.png'
+                    };
+                    var n = new Notification(title, options);
+                }
+            })
         },
         markAsReadNotification() {
             if (this.notifications.length > 0) {
