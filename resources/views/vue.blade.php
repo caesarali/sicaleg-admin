@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="env-level" content="dprd">
+    <meta name="env-level" content="{{ env('CALEG_LEVEL', 'dpr') }}">
     <title>{{ config('app.name') }} - {{ config('app.desc') }}</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,27 +30,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <script>
-        Notification.requestPermission().then(function(result) {
-            if (result === 'denied') {
-                console.log('Permission wasn\'t granted. Allow a retry.');
-                return;
-            }
-            if (result === 'default') {
-                console.log('The permission request was dismissed.');
-                return;
-            }
-            // Do something with the granted permission.
-        });
-
-        function spawnNotification(body, icon, title) {
-            var options = {
-                body: 'asdasd',
-                icon: 'asdasd'
-            };
-            var n = new Notification('asdasd', options);
-        }
-    </script> --}}
 </head>
 <body class="hold-transition layout-navbar-fixed">
     <div id="app" class="wrapper">
