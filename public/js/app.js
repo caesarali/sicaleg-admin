@@ -113314,7 +113314,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
           broadcaster: 'pusher',
           key: "b14674edb9d4739b37d6",
           cluster: "ap1",
-          encrypted: false,
+          encrypted: true,
           auth: {
             headers: {
               Authorization: 'Bearer ' + this.token
@@ -113387,19 +113387,18 @@ if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
+} // if ('serviceWorker' in navigator ) {
+//     window.addEventListener('load', function() {
+//         navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+//             // Registration was successful
+//             console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//         }, function(err) {
+//             // registration failed :(
+//             console.log('ServiceWorker registration failed: ', err);
+//         });
+//     });
+// }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function (err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
