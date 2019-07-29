@@ -29,14 +29,13 @@ mix.webpackConfig({
             dynamicUrlToDependencies: {
                 // you should add the path to your blade files here so they can be cached
                 // and have full support for offline first (example below)
-                '/': ['resources/views/vue.blade.php'],
-                '/dashboard': ['resources/views/vue.blade.php'],
+                '/': ['resources/views/spa.blade.php'],
             },
             staticFileGlobsIgnorePatterns: [/\.map$/, /mix-manifest\.json$/, /manifest\.json$/, /service-worker\.js$/],
             navigateFallback: '/',
             runtimeCaching: [
                 {
-                    urlPattern: new RegExp('^https://sicaleg.web/api/'),
+                    urlPattern: new RegExp('^https://sicaleg.smartinovasi.com/api'),
                     handler: 'networkFirst',
                     options: {
                         networkTimeoutSeconds: 10,

@@ -113312,8 +113312,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
       if (this.isAuth && this.user.id != '') {
         window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_7__["default"]({
           broadcaster: 'pusher',
-          key: "b14674edb9d4739b37d6",
-          cluster: "ap1",
+          key: 'b14674edb9d4739b37d6',
+          cluster: 'ap1',
           encrypted: true,
           auth: {
             headers: {
