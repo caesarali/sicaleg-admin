@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'desc' => env('APP_DESC', 'The PHP Framework For Web Artisans'),
+    'caleg' => env('APP_CALEG', 'The PHP Framework For Web Artisans'),
 
     /*
     |--------------------------------------------------------------------------
