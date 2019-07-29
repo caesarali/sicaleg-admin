@@ -121,8 +121,8 @@ const app = new Vue({
             if (this.isAuth && this.user.id != '') {
                 window.Echo = new Echo({
                     broadcaster: 'pusher',
-                    key: 'b14674edb9d4739b37d6',
-                    cluster: 'ap1',
+                    key: process.env.MIX_PUSHER_APP_KEY,
+                    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
                     encrypted: true,
                     auth: {
                         headers: {
