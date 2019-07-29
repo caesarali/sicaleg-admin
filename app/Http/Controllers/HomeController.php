@@ -25,7 +25,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('vue');
+        return view('spa');
     }
 
     public function setup()
