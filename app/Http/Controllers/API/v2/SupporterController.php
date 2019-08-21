@@ -31,7 +31,7 @@ class SupporterController extends Controller
     {
         $nik = $request->nik;
         $voter = Voter::where('nik', 'like', "%$nik%")->firstOrFail();
-        if ($voter) {
+        if ($voter && !$voter->is_supporter) {
             $user = $request->user();
             $users = User::whereHas('roles', function ($query) {
                 $query->where('name', 'superadmin')->orWhere('name', 'admin');

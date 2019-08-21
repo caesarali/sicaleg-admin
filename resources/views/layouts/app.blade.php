@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="level" content="{{ Auth::user()->role()->name }}">
     <meta name="env-level" content="{{ env('CALEG_LEVEL', 'dpr') }}">
     <title>{{ config('app.name') }} - {{ config('app.desc') }}</title>
 
@@ -78,7 +77,7 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'monitoring' }" class="nav-link close-sidebar">
                                 <i class="far fa-user-circle nav-icon"></i>
-                                <p class="ml-1">Relawan</p>
+                                <p class="ml-1">Kinerja Relawan</p>
                             </router-link>
                         </li>
 

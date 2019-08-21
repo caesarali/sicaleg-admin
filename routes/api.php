@@ -62,5 +62,7 @@ Route::namespace('API\v2')->prefix('v2')->middleware('auth:api')->group(function
     Route::get('/candidate', 'CandidateController@index');
     Route::get('/voter/{nik}', 'VoterController@search');
     Route::get('/dashboard', 'SupporterController@monitor');
+    Route::get('/profile', 'ProfileController@index');
+    Route::post('/profile', 'ProfileController@save');
     Route::apiResource('supporters', 'SupporterController')->only(['index', 'store', 'destroy']);
 });
