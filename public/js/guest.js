@@ -49052,7 +49052,20 @@ if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-} // if ('serviceWorker' in navigator ) {
+}
+
+Notification.requestPermission().then(function (result) {
+  if (result === 'denied') {
+    console.log('Permission wasn\'t granted. Allow a retry.');
+    return;
+  }
+
+  if (result === 'default') {
+    console.log('The permission request was dismissed.');
+    return;
+  } // Do something with the granted permission.
+
+}); // if ('serviceWorker' in navigator ) {
 //     window.addEventListener('load', function() {
 //         navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
 //             // Registration was successful
@@ -49129,7 +49142,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Sites\LaraPro\sicaleg\resources\js\guest.js */"./resources/js/guest.js");
+module.exports = __webpack_require__(/*! D:\Sites\LaraPro\simcaleg\resources\js\guest.js */"./resources/js/guest.js");
 
 
 /***/ })

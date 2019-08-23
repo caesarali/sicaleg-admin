@@ -78,7 +78,7 @@ class VolunteerController extends Controller
         $volunteer = Volunteer::withCount('supporters')->where('id', $id)->orWhere('nik', $id)->firstOrFail();
         $supporters = DB::table('supporters')->count();
         $volunteer->load('locationable', 'user.roles');
-        $volunteer['contribution'] = $supporters * $volunteer->supporters_count / 100;
+        $volunteer['contribution'] = ($volunteer->supporters_count / $supporters) * 100;
         return response()->json($volunteer);
     }
 

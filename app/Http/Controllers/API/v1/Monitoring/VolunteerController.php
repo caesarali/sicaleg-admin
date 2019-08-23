@@ -21,7 +21,7 @@ class VolunteerController extends Controller
         $data['total_volunteers'] = $volunteers->count();
         $data['uncontributed_volunteers'] = $volunteers->where('supporters_count', 0)->count();
         $data['total_supporters'] = $supporters;
-        $data['target_supporters'] = $voter * 20 / 100;
+        $data['target_supporters'] = round($voter * 20 / 100);
         return response()->json($data);
     }
 

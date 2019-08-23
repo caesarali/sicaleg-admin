@@ -113387,7 +113387,20 @@ if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-} // if ('serviceWorker' in navigator ) {
+}
+
+Notification.requestPermission().then(function (result) {
+  if (result === 'denied') {
+    console.log('Permission wasn\'t granted. Allow a retry.');
+    return;
+  }
+
+  if (result === 'default') {
+    console.log('The permission request was dismissed.');
+    return;
+  } // Do something with the granted permission.
+
+}); // if ('serviceWorker' in navigator ) {
 //     window.addEventListener('load', function() {
 //         navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
 //             // Registration was successful
@@ -116428,9 +116441,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Sites\LaraPro\sicaleg\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Sites\LaraPro\sicaleg\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\Sites\LaraPro\sicaleg\resources\sass\guest.scss */"./resources/sass/guest.scss");
+__webpack_require__(/*! D:\Sites\LaraPro\simcaleg\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Sites\LaraPro\simcaleg\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\Sites\LaraPro\simcaleg\resources\sass\guest.scss */"./resources/sass/guest.scss");
 
 
 /***/ })

@@ -41,6 +41,18 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+Notification.requestPermission().then(function(result) {
+    if (result === 'denied') {
+      console.log('Permission wasn\'t granted. Allow a retry.');
+      return;
+    }
+    if (result === 'default') {
+      console.log('The permission request was dismissed.');
+      return;
+    }
+    // Do something with the granted permission.
+});
+
 // if ('serviceWorker' in navigator ) {
 //     window.addEventListener('load', function() {
 //         navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
