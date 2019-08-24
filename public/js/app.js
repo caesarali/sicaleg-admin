@@ -113312,9 +113312,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
       if (this.isAuth && this.user.id != '') {
         window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_7__["default"]({
           broadcaster: 'pusher',
-          key: "b14674edb9d4739b37d6",
+          key: "916f19e5ba5715803c79",
           cluster: "ap1",
-          encrypted: true,
+          forceTLS: true,
           auth: {
             headers: {
               Authorization: 'Bearer ' + this.token
@@ -113336,6 +113336,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
     if (this.isAuth) {
       this.getUserLogin();
       this.getNotifications();
+      console.log("916f19e5ba5715803c79");
     }
   }
 });

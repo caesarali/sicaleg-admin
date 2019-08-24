@@ -123,7 +123,7 @@ const app = new Vue({
                     broadcaster: 'pusher',
                     key: process.env.MIX_PUSHER_APP_KEY,
                     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-                    encrypted: true,
+                    forceTLS: true,
                     auth: {
                         headers: {
                             Authorization: 'Bearer ' + this.token
@@ -147,6 +147,7 @@ const app = new Vue({
         if (this.isAuth) {
             this.getUserLogin()
             this.getNotifications()
+            console.log(process.env.MIX_PUSHER_APP_KEY);
         }
     }
 });
