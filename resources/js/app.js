@@ -143,11 +143,10 @@ const app = new Vue({
             this.initialLister()
         }
     },
-    created() {
+    async created() {
         if (this.isAuth) {
-            this.getUserLogin()
+            await this.getUserLogin()
             this.getNotifications()
-            console.log(process.env.MIX_PUSHER_APP_KEY);
         }
     }
 });
