@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $keyword = $request->keyword;
         $page = $request->page;
-        $users = User::whereHas('roles', function ($query) {
+        $users = User::whereHas('role', function ($query) {
             $query->where('name', '!=', 'superadmin');
         })->where('name', 'like', "%{$keyword}%")->orderBy('name', 'asc');
         $users = $page && $page > 0 ? $users->paginate() : $users->get();

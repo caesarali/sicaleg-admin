@@ -27,7 +27,7 @@ class CoordinatorResource extends JsonResource
             'address' => $this->address,
             'phone' => $this->phone,
             'information' => $this->information,
-            'role' => $this->user->role()->name,
+            'role' => $this->user->role->name,
             'location' => $this->locationable->name,
             'contribution' => $this->supporters->count(),
             $this->mergeWhen($this->locationable_type == City::class, [

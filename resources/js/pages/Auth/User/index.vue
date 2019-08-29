@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary app-shadow" @click="create">
-                            <i class="fas fa-plus mr-1"></i> Administrator
+                            <i class="fas fa-plus"></i> <span class="ml-1 d-none d-md-inline">Administrator</span>
                         </button>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                                             <td>{{ item.username }}</td>
                                             <td>{{ item.email }}</td>
                                             <td class="text-center">
-                                                <span v-for="role in item.roles" :key="role.id" class="badge badge-secondary">{{ role.name }}</span>
+                                                <span class="badge badge-secondary">{{ item.role.display_name }}</span>
                                             </td>
                                             <td class="text-center">
                                                 <a href="#" @click.prevent="reset(item.id)" class="badge badge-warning">

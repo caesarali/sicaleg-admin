@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PartySeeder::class);
         $this->call(DisabilitiesSeeder::class);
         $this->call(CandidateSeeder::class);
+        $this->call(DapilSeeder::class);
     }
 }

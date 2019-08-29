@@ -58,7 +58,7 @@
                                             <span class="badge badge-info float-right">{{ item.supporters_count }} Suara</span>
                                         </router-link>
                                         <span class="product-description">
-                                            {{ item.user.roles[0].display_name }}
+                                            {{ item.user.role.display_name }}
                                         </span>
                                     </div>
                                 </li>

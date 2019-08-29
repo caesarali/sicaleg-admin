@@ -19,7 +19,7 @@ class LastAcitivitiesResource extends JsonResource
         return [
             // 'date' => Carbon::parse($this->getOriginal('created_at'))->diffForHumans(),
             'date' => $this->created_at,
-            'user' => $this->createdBy->load('volunteer.locationable', 'roles'),
+            'user' => $this->createdBy->load('volunteer.locationable', 'role'),
             'voter' => $this->voter
         ];
     }

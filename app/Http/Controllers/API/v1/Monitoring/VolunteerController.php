@@ -16,7 +16,7 @@ class VolunteerController extends Controller
         $voter = Voter::count();
         $supporters = Supporter::count();
         $volunteers = Volunteer::withCount('supporters')->orderBy('supporters_count', 'desc')->get();
-        $volunteers->load('locationable', 'user.roles');
+        $volunteers->load('locationable', 'user.role');
         $data['top_volunteers'] = $volunteers->where('supporters_count', '>', 0)->take(5);
         $data['total_volunteers'] = $volunteers->count();
         $data['uncontributed_volunteers'] = $volunteers->where('supporters_count', 0)->count();
@@ -44,7 +44,7 @@ class VolunteerController extends Controller
     public function topVolunteers()
     {
         $volunteers = Volunteer::whereHas('supporters')->withCount('supporters')->orderBy('supporters_count', 'desc')->take(5)->get();
-        $volunteers->load('locationable', 'user.roles');
+        $volunteers->load('locationable', 'user.role');
         return response()->json($volunteers);
     }
 }

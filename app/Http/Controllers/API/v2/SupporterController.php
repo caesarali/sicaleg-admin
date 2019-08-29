@@ -23,7 +23,7 @@ class SupporterController extends Controller
                 return $q->where('name', 'like', "%{$keyword}%")->orWhere('nik', 'like', "%{$keyword}%");
             });
         })->orderBy('created_at', 'desc');
-        $supporters = $page && $page > 0 ? $supporters->paginate() : $supporters->get();
+        $supporters = $page && $page > 0 ? $supporters->paginate(50) : $supporters->get();
         return SupporterResource::collection($supporters);
     }
 
@@ -33,7 +33,7 @@ class SupporterController extends Controller
         $voter = Voter::where('nik', 'like', "%$nik%")->firstOrFail();
         if ($voter && !$voter->is_supporter) {
             $user = $request->user();
-            $users = User::whereHas('roles', function ($query) {
+            $users = User::whereHas('role', function ($query) {
                 $query->where('name', 'superadmin')->orWhere('name', 'admin');
             })->get();
             Supporter::create([

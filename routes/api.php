@@ -3,7 +3,7 @@
 Route::post('/login', 'API\v1\Auth\LoginController@login');
 Route::namespace('API\v1')->middleware('auth:api')->group(function () {
     Route::get('/user', function () {
-        return response()->json(auth('api')->user()->load('roles'));
+        return response()->json(auth('api')->user()->load('role'));
     });
     Route::get('/notifications', function () {
         $notifications = auth('api')->user()->unreadNotifications;

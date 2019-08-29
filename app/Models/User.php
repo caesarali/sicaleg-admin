@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable, SoftDeletes;
 
-    protected $fillable = ['name', 'username', 'email', 'password', 'last_login_ip', 'last_login_at'];
+    protected $fillable = ['name', 'username', 'email', 'password', 'role_id', 'last_login_ip', 'last_login_at'];
     protected $hidden = ['password', 'remember_token'];
     protected $dates = ['deleted_at'];
 
@@ -20,43 +20,23 @@ class User extends Authenticatable
         return $this->hasOne(Volunteer::class);
     }
 
-    public function roles() {
-        return $this->belongsToMany(Role::class);
-    }
-
     public function role() {
-        return $this->roles->first();
+        return $this->belongsTo(Role::class);
     }
 
     public function assignRole($role) {
         if (is_string($role)) {
             $role = Role::whereName($role)->first();
+            return $this->update(['role_id' => $role->id ?? null]);
         }
-        return $this->roles()->attach($role);
-    }
-
-    public function revokeRole($role) {
-        if (is_string($role)) {
-            $role = Role::whereName($role)->first();
-        }
-        return $this->roles()->detach($role);
-    }
-
-    public function syncRole($role) {
-        if (is_string($role)) {
-            $role = Role::whereName($role)->first();
-        }
-        return $this->roles()->sync($role);
     }
 
     public function hasRole($roles) {
         if (is_string($roles)) {
             $roles = [$roles];
         }
-        foreach ($roles as $name) {
-            foreach ($this->roles as $role) {
-                if ($role->name === $name) return true;
-            }
+        foreach ($roles as $role) {
+            if ($this->role->name === $role) return true;
         }
         return false;
     }

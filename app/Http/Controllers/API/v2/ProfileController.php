@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $userId = request()->user()->id;
         $profile = Volunteer::where('user_id', $userId)->firstOrFail();
-        $profile->load('user.roles');
+        $profile->load('user.role');
 
         $contribution = $profile->supporters->count();
         $supporters = DB::table('supporters')->count();
@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $profile = Volunteer::where('user_id', $user->id)->firstOrFail();
         $profile->name = $user->name;
         $profile->save();
-        $profile->load('user.roles');
+        $profile->load('user.role');
 
         return response()->json(['data' => $profile, 'message' => 'Perubahan disimpan.'], 200);
     }
