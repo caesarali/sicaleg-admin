@@ -60,9 +60,13 @@ class SupporterController extends Controller
     {
         $supporters = Supporter::count();
         $voters = Voter::count();
-        $data['supporters'] = $supporters;
-        $data['target']['total'] = round($voters * 20 / 100);
-        $data['target']['percent'] = 20;
+        $data = [
+            'supporters' => $supporters,
+            'target' => [
+                'total' => round($voters * 20 / 100),
+                'percent' => 20
+            ]
+        ];
         return response()->json($data);
     }
 }
