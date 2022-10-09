@@ -3,7 +3,7 @@ This App using Laravel Framework version 5.8.x
 
 ## Official Laravel Documentation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Documentation for the framework can be found on the [Laravel website](https://laravel.com/docs/5.8).
 
 ## To use this app
 
@@ -19,7 +19,9 @@ Documentation for the framework can be found on the [Laravel website](http://lar
 
 - Run `php artisan key:generate`
 
-- Run `php artisan key:generate`
+- Run `php artisan passport:install --force`
+
+- Run `php artisan passport:keys --force`
 
 - Run `php artisan migrate --seed`
 
@@ -28,4 +30,5 @@ Documentation for the framework can be found on the [Laravel website](http://lar
 - Done.
 
 ## Any Question ? Contact me on:
-- [Facebook](https://facebook.com/caesaralilamondo)
+- [Twitter](https://twitter.com/caesarali_L)
+- [Telegram](https://t.me/caesarali)
